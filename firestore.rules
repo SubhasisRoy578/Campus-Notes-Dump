@@ -1,0 +1,68 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isUser(uid) {
+      return isAuthenticated() && request.auth.uid == uid;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && (
+        request.auth.token.role == 'faculty_admin' ||
+        request.auth.token.admin == true
+      );
+    }
+    
+    // Users Profile Collection
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow write: if isUser(userId) || isAdmin();
+    }
+    
+    // Subjects Catalog: Publicly readable by all students & scholars
+    match /subjects/{subjectId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    // Academic Resources:
+    // 1. Published resources are publicly readable by everyone without sign-in.
+    // 2. Pending and rejected resources only readable by the original uploader or admin.
+    // 3. Authenticated scholars can submit new resources with status 'pending_review'.
+    // 4. PUBLISHED RESOURCES ARE IMMUTABLE TO ORDINARY USERS. No update or delete!
+    // 5. Only admins can transition status, approve, reject, or archive.
+    match /resources/{resourceId} {
+      allow read: if resource.data.status == 'published'
+                  || (isAuthenticated() && (resource.data.uploaderUid == request.auth.uid || isAdmin()));
+                  
+      allow create: if isAuthenticated()
+                    && request.resource.data.uploaderUid == request.auth.uid
+                    && (
+                      (request.resource.data.status == 'pending_review') ||
+                      (isAdmin() && request.resource.data.status == 'published')
+                    );
+                    
+      // Published resources CANNOT be updated or deleted by normal users
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+    
+    // Resource Reports: Authenticated scholars or public visitors can report violations
+    match /resourceReports/{reportId} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+    
+    // Moderation Logs: Immutable audit trail written only during admin moderation
+    match /moderationLogs/{logId} {
+      allow read: if isAdmin();
+      allow create: if isAdmin();
+      allow update, delete: if false; // strictly immutable audit history
+    }
+  }
+}

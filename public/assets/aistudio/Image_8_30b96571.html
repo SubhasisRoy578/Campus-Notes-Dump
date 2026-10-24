@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Upload Resource &amp; Academic Contribution — CampusNotes</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Serif:ital,wght@0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-container": "#285744",
+            "on-primary-fixed": "#002115",
+            "on-primary-fixed-variant": "#204f3d",
+            "error-container": "#ffdad6",
+            "tertiary": "#333936",
+            "on-tertiary-fixed-variant": "#424845",
+            "secondary-container": "#dee4df",
+            "surface-container-high": "#e5e9e4",
+            "surface-tint": "#396753",
+            "inverse-primary": "#a0d1b9",
+            "outline": "#717974",
+            "inverse-on-surface": "#edf2ed",
+            "primary-fixed": "#bbeed4",
+            "surface-container-highest": "#dfe4df",
+            "surface-bright": "#f6fbf5",
+            "on-tertiary-container": "#bcc2bd",
+            "on-secondary": "#ffffff",
+            "error": "#ba1a1a",
+            "on-secondary-fixed": "#171d1a",
+            "on-background": "#181d1a",
+            "surface-variant": "#dfe4df",
+            "on-tertiary": "#ffffff",
+            "surface-dim": "#d7dbd6",
+            "on-surface-variant": "#414944",
+            "tertiary-fixed": "#dee4df",
+            "background": "#f6fbf5",
+            "on-secondary-container": "#606662",
+            "secondary-fixed": "#dee4df",
+            "on-primary-container": "#99cbb3",
+            "on-surface": "#181d1a",
+            "secondary": "#5a605c",
+            "on-primary": "#ffffff",
+            "on-secondary-fixed-variant": "#424845",
+            "tertiary-fixed-dim": "#c2c8c3",
+            "primary": "#0d402e",
+            "surface-container-lowest": "#ffffff",
+            "on-error": "#ffffff",
+            "inverse-surface": "#2c322e",
+            "surface-container-low": "#f0f5f0",
+            "outline-variant": "#c0c9c2",
+            "surface": "#f6fbf5",
+            "secondary-fixed-dim": "#c2c8c3",
+            "on-error-container": "#93000a",
+            "surface-container": "#ebefea",
+            "primary-fixed-dim": "#a0d1b9",
+            "on-tertiary-fixed": "#171d1a",
+            "tertiary-container": "#4a504d"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "gutter": "1.5rem",
+            "gutter-mobile": "1rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem",
+            "margin-mobile": "1.25rem",
+            "space-lg": "1.5rem",
+            "space-sm": "0.5rem",
+            "margin": "3rem",
+            "space-xl": "2.5rem"
+          },
+          "fontFamily": {
+            "headline-md": ["Noto Serif"],
+            "body-md": ["Inter"],
+            "headline-lg-mobile": ["Noto Serif"],
+            "headline-xl": ["Noto Serif"],
+            "caption": ["Inter"],
+            "label-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-sm": ["Noto Serif"],
+            "headline-xl-mobile": ["Noto Serif"],
+            "label-sm": ["Inter"],
+            "headline-lg": ["Noto Serif"]
+          },
+          "fontSize": {
+            "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-xl": ["40px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "caption": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "500" }],
+            "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+            "body-sm": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+            "headline-xl-mobile": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.03em", "fontWeight": "600" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased min-h-full flex flex-col selection:bg-secondary-container selection:text-primary">
+<!-- Shared Component: TopNavBar (Docked Full-Width Top) -->
+<header class="w-full border-b border-outline-variant bg-surface-container-lowest sticky top-0 z-40">
+<div class="max-w-[1320px] mx-auto px-gutter md:px-margin flex items-center justify-between h-16">
+<!-- Left: Brand Logo & Global Search -->
+<div class="flex items-center gap-space-lg">
+<a class="text-headline-md font-headline-md font-semibold text-primary tracking-tight flex items-center gap-space-xs" href="#">
+<span class="material-symbols-outlined text-primary" data-icon="local_library">local_library</span>
+<span>CampusNotes</span>
+</a>
+<!-- Search Bar on Left as defined in JSON -->
+<div class="hidden lg:flex items-center relative w-72">
+<span class="material-symbols-outlined absolute left-3 text-secondary text-lg" data-icon="search">search</span>
+<input class="w-full pl-9 pr-10 py-1.5 bg-surface-container-low border border-outline-variant rounded-lg text-body-sm font-body-sm placeholder:text-secondary focus:outline-none focus:border-primary focus:bg-surface-container-lowest transition-colors" placeholder="Search catalog, courses, DOIs..." type="text"/>
+<span class="absolute right-2.5 px-1.5 py-0.5 border border-outline-variant rounded text-[10px] text-secondary font-caption bg-surface-container-lowest">⌘K</span>
+</div>
+</div>
+<!-- Navigation Links (Centered/Desktop) -->
+<nav class="hidden md:flex items-center gap-space-lg text-label-md font-label-md">
+<a class="text-secondary hover:text-on-surface transition-colors pb-1" href="#">Browse Resources</a>
+<a class="text-secondary hover:text-on-surface transition-colors pb-1" href="#">All Subjects</a>
+<a class="text-secondary hover:text-on-surface transition-colors pb-1" href="#">Recently Added</a>
+</nav>
+<!-- Trailing Action Cluster -->
+<div class="flex items-center gap-space-md">
+<!-- Active Primary Action Button -->
+<a class="bg-primary text-surface-container-lowest text-label-md font-label-md px-space-md py-2 rounded-lg font-medium flex items-center gap-1.5 hover:bg-primary-container transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-sm font-semibold" data-icon="upload_file">upload_file</span>
+<span>Upload Resource</span>
+</a>
+<div class="h-5 w-[1px] bg-outline-variant hidden sm:block"></div>
+<!-- Trailing Icon Actions -->
+<button aria-label="Notifications" class="text-secondary hover:text-primary transition-colors p-1 relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="w-2 h-2 rounded-full bg-primary absolute top-1 right-1"></span>
+</button>
+<!-- Authenticated Profile Capsule: Marcus S. (TA) -->
+<div class="flex items-center gap-2 pl-1 border-l border-outline-variant">
+<div class="relative w-8 h-8 rounded-full overflow-hidden border border-outline-variant bg-surface-container">
+<img alt="User profile photo" class="w-full h-full object-cover" data-alt="Scholarly close-up portrait of a university teaching assistant named Marcus, looking composed and professional against a neutral academic study room background, softly lit with cool ambient library daylight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvjlvtnKC4RJGInFGHpWI7mxyv36eV6bq8elCtCGFAMSCQm6u4Ey3DRqvZZUErFdpvff3zJ-dpHhs9MA4ahUKJMd2TALt5tdC4uV18al4Ul5i-JAQHeLLIvoX1s9qL5BiV33Cay8Oo-1G2RbxO4Whe0H87BTfzT5JwZlNeV73E45eFfvmdUr3S77F9YZT_5LJtySwYGGoLSgnh2IvgU_SOgsTT2hrHxEdmIvsfSZ5iBNX3OenQ79D3"/>
+</div>
+<div class="hidden sm:flex flex-col text-left">
+<span class="text-label-sm font-label-sm text-on-surface leading-tight font-semibold">Marcus S.</span>
+<span class="text-[11px] text-secondary font-caption leading-tight">Teaching Assistant (CS)</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Canvas Surface Container -->
+<main class="flex-1 max-w-[1320px] w-full mx-auto px-gutter md:px-margin py-space-lg">
+<!-- Breadcrumb Chain -->
+<nav aria-label="Breadcrumb" class="flex items-center gap-2 text-label-sm font-label-sm text-secondary mb-space-md">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span class="text-outline-variant">/</span>
+<a class="hover:text-primary transition-colors" href="#">Contribute</a>
+<span class="text-outline-variant">/</span>
+<span class="text-on-surface font-semibold">Upload Resource</span>
+</nav>
+<!-- Page Header & Archival Badge -->
+<div class="border-b border-outline-variant pb-space-md mb-space-xl flex flex-col md:flex-row md:items-end justify-between gap-space-sm">
+<div>
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container text-primary text-caption font-caption uppercase tracking-wider mb-space-xs border border-outline-variant">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified_user">verified_user</span>
+<span>Verified Course Repository Standard</span>
+</div>
+<h1 class="text-headline-lg font-headline-lg text-primary tracking-tight">Academic Resource Submission</h1>
+<p class="text-body-md font-body-md text-secondary mt-1 max-w-2xl">
+          Publish syllabus-aligned lecture materials, verified problem sets, and unit reference notes into the permanent collegiate archive.
+        </p>
+</div>
+<div class="text-right hidden md:block">
+<span class="text-caption font-caption text-secondary uppercase block tracking-wider">Archival Cycle</span>
+<span class="text-label-md font-label-md font-semibold text-primary">Fall / Winter 2024–2025</span>
+</div>
+</div>
+<!-- Two-Column Asymmetric Workbench Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT COLUMN: Form Fields (8 Cols) -->
+<section class="lg:col-span-8 flex flex-col gap-space-lg">
+<!-- Section 1: Academic Location & Taxonomy -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-space-lg shadow-sm">
+<div class="flex items-center justify-between border-b border-outline-variant pb-space-sm mb-space-md">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-surface-container text-primary font-headline-sm text-xs flex items-center justify-center font-bold">1</span>
+<h2 class="text-headline-sm font-headline-sm text-primary">Academic Location &amp; Taxonomy</h2>
+</div>
+<span class="text-caption font-caption text-secondary">Step 1 of 4</span>
+</div>
+<div class="space-y-space-md">
+<!-- Academic Year Segmented Radio Cards -->
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface mb-2 font-semibold">
+                Curricular Academic Year <span class="text-error">*</span>
+</label>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-sm">
+<!-- Option 1 -->
+<label class="cursor-pointer border border-outline-variant rounded-lg p-3 text-center flex flex-col items-center hover:bg-surface-container-low transition-colors">
+<input class="sr-only" name="academic_year" type="radio" value="1"/>
+<span class="text-label-md font-label-md text-secondary">1st Year</span>
+<span class="text-caption font-caption text-secondary mt-0.5">Freshman</span>
+</label>
+<!-- Option 2 (Selected) -->
+<label class="cursor-pointer border-2 border-primary bg-surface-container-low rounded-lg p-3 text-center flex flex-col items-center">
+<input checked="" class="sr-only" name="academic_year" type="radio" value="2"/>
+<div class="flex items-center gap-1">
+<span class="text-label-md font-label-md font-bold text-primary">2nd Year</span>
+<span class="material-symbols-outlined text-primary text-[16px]" data-icon="check_circle" data-weight="fill">check_circle</span>
+</div>
+<span class="text-caption font-caption text-primary mt-0.5 font-medium">Sophomore</span>
+</label>
+<!-- Option 3 -->
+<label class="cursor-pointer border border-outline-variant rounded-lg p-3 text-center flex flex-col items-center hover:bg-surface-container-low transition-colors">
+<input class="sr-only" name="academic_year" type="radio" value="3"/>
+<span class="text-label-md font-label-md text-secondary">3rd Year</span>
+<span class="text-caption font-caption text-secondary mt-0.5">Junior</span>
+</label>
+<!-- Option 4 -->
+<label class="cursor-pointer border border-outline-variant rounded-lg p-3 text-center flex flex-col items-center hover:bg-surface-container-low transition-colors">
+<input class="sr-only" name="academic_year" type="radio" value="4"/>
+<span class="text-label-md font-label-md text-secondary">4th Year</span>
+<span class="text-caption font-caption text-secondary mt-0.5">Senior / Capstone</span>
+</label>
+</div>
+</div>
+<!-- Semester Selector (Pills) -->
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface mb-2 font-semibold">
+                Semester Cohort <span class="text-error">*</span>
+</label>
+<div class="flex items-center gap-space-sm">
+<button class="px-4 py-2 rounded-lg text-label-sm font-label-sm bg-primary text-surface-container-lowest font-medium border border-primary flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px]" data-icon="done">done</span>
+<span>Semester 3 (Fall)</span>
+</button>
+<button class="px-4 py-2 rounded-lg text-label-sm font-label-sm bg-surface-container-lowest text-secondary border border-outline-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" type="button">
+<span>Semester 4 (Spring)</span>
+</button>
+<span class="text-caption font-caption text-secondary ml-2 italic">Refreshed based on 2nd Year selection</span>
+</div>
+</div>
+<!-- Subject Selector & Request New Subject -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md pt-space-xs">
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<label class="text-label-sm font-label-sm text-on-surface font-semibold">
+                    Course / Subject Code <span class="text-error">*</span>
+</label>
+<a class="text-caption font-caption text-primary hover:underline font-semibold flex items-center gap-0.5" href="#">
+<span class="material-symbols-outlined text-[13px]" data-icon="add">add</span>
+                    Request New Subject
+                  </a>
+</div>
+<div class="relative">
+<select class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary transition-colors appearance-none">
+<option selected="">CS201 Data Structures</option>
+<option>CS202 Digital Logic &amp; Computer Architecture</option>
+<option>MA201 Linear Algebra &amp; Vector Calculus</option>
+<option>CS204 Discrete Mathematical Structures</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-secondary pointer-events-none text-lg" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<!-- Unit / Module Input -->
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface mb-1.5 font-semibold">
+                  Unit / Module Tag <span class="text-secondary font-normal">(Optional)</span>
+</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface placeholder:text-secondary focus:outline-none focus:border-primary transition-colors" placeholder="e.g., Unit 3: Graph Algorithms &amp; Minimum Spanning Trees" type="text" value="Unit 3: Graph Algorithms &amp; Minimum Spanning Trees"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 2: Resource Classification & Metadata -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-space-lg shadow-sm">
+<div class="flex items-center justify-between border-b border-outline-variant pb-space-sm mb-space-md">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-surface-container text-primary font-headline-sm text-xs flex items-center justify-center font-bold">2</span>
+<h2 class="text-headline-sm font-headline-sm text-primary">Resource Classification &amp; Metadata</h2>
+</div>
+<span class="text-caption font-caption text-secondary">Step 2 of 4</span>
+</div>
+<div class="space-y-space-md">
+<!-- Resource Title -->
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface mb-1.5 font-semibold">
+                Archival Resource Title <span class="text-error">*</span>
+</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-3 py-2 text-body-md font-body-md text-on-surface font-medium focus:outline-none focus:border-primary transition-colors" type="text" value="CS201: Comprehensive Graph Traversal &amp; Dijkstra Step-by-Step Guide"/>
+<span class="text-caption font-caption text-secondary mt-1 block">Standard format: [Course Code]: [Topic Name] [Document Form]</span>
+</div>
+<!-- Resource Type Pills -->
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface mb-2 font-semibold">
+                Primary Classification <span class="text-error">*</span>
+</label>
+<div class="flex flex-wrap gap-2">
+<!-- Selected Pill -->
+<button class="px-3 py-1.5 rounded bg-primary text-surface-container-lowest text-label-sm font-label-sm font-medium border border-primary flex items-center gap-1.5 shadow-xs" type="button">
+<span class="material-symbols-outlined text-[15px]" data-icon="check">check</span>
+                  Lecture Notes / Class Notes
+                </button>
+<button class="px-3 py-1.5 rounded bg-surface-container-low text-on-surface-variant hover:text-on-surface text-label-sm font-label-sm border border-outline-variant hover:bg-surface-container transition-colors" type="button">
+                  Previous-Year Question Paper
+                </button>
+<button class="px-3 py-1.5 rounded bg-surface-container-low text-on-surface-variant hover:text-on-surface text-label-sm font-label-sm border border-outline-variant hover:bg-surface-container transition-colors" type="button">
+                  Lab Manual &amp; Code Logs
+                </button>
+<button class="px-3 py-1.5 rounded bg-surface-container-low text-on-surface-variant hover:text-on-surface text-label-sm font-label-sm border border-outline-variant hover:bg-surface-container transition-colors" type="button">
+                  Formula / Cheatsheet
+                </button>
+<button class="px-3 py-1.5 rounded bg-surface-container-low text-on-surface-variant hover:text-on-surface text-label-sm font-label-sm border border-outline-variant hover:bg-surface-container transition-colors" type="button">
+                  Reference Material
+                </button>
+</div>
+</div>
+<!-- Brief Academic Summary -->
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface mb-1.5 font-semibold">
+                Academic Context &amp; Abstract Summary
+              </label>
+<textarea class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-3 text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary transition-colors resize-y" placeholder="Include key concepts covered, midterm relevance, or professor references..." rows="3">Contains exhaustive proof-step breakdowns for Breadth-First Search (BFS), Depth-First Search (DFS), and Dijkstra's Shortest Path algorithm with adjacency lists. Includes 4 solved previous exam questions from Fall 2023 with Professor Aris's standard grading rubric annotations.</textarea>
+<div class="flex items-center justify-between mt-1 text-caption font-caption text-secondary">
+<span>Helps students determine document relevance during citation searches.</span>
+<span>274 / 600 characters</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 3: File Attachment & Verification Dropzone -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-space-lg shadow-sm">
+<div class="flex items-center justify-between border-b border-outline-variant pb-space-sm mb-space-md">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-surface-container text-primary font-headline-sm text-xs flex items-center justify-center font-bold">3</span>
+<h2 class="text-headline-sm font-headline-sm text-primary">File Attachment &amp; Verification Dropzone</h2>
+</div>
+<span class="text-caption font-caption text-secondary">Step 3 of 4</span>
+</div>
+<!-- Dropzone Container -->
+<div class="border-2 border-dashed border-outline-variant rounded-lg p-space-lg bg-surface-container-low/50 hover:bg-surface-container-low hover:border-primary transition-colors text-center cursor-pointer flex flex-col items-center justify-center">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-primary mb-space-sm">
+<span class="material-symbols-outlined text-2xl" data-icon="cloud_upload">cloud_upload</span>
+</div>
+<p class="text-body-md font-body-md font-medium text-on-surface">
+              Drag &amp; drop course document here, or <span class="text-primary underline font-semibold">Browse Files</span>
+</p>
+<p class="text-caption font-caption text-secondary mt-1">
+              Permitted formats: PDF, DOC, DOCX, TXT, PNG, JPG • Maximum file size: 25 MB
+            </p>
+</div>
+<!-- Attached File Preview Card -->
+<div class="mt-space-md border border-outline-variant rounded-lg p-space-md bg-surface-container-lowest flex flex-col gap-space-sm">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-primary-fixed/30 border border-outline-variant flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl" data-icon="picture_as_pdf">picture_as_pdf</span>
+</div>
+<div>
+<h4 class="text-label-md font-label-md font-semibold text-on-surface">CS201_Graph_Algorithms_Guide_2024.pdf</h4>
+<div class="flex items-center gap-2 text-caption font-caption text-secondary">
+<span>4.6 MB</span>
+<span>•</span>
+<span>PDF Document (Text + Vector Diagrams)</span>
+<span>•</span>
+<span class="text-primary font-semibold flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[13px]" data-icon="check_circle" data-weight="fill">check_circle</span>
+                      300 DPI Verified
+                    </span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="text-secondary hover:text-primary p-1 text-sm transition-colors" title="Preview PDF" type="button">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+<button class="text-secondary hover:text-error p-1 text-sm transition-colors" title="Remove File" type="button">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+</div>
+<!-- Progress & Integrity Bar -->
+<div class="w-full">
+<div class="w-full bg-surface-container-high rounded-full h-1.5 overflow-hidden">
+<div class="bg-primary h-1.5 rounded-full w-full"></div>
+</div>
+<div class="flex items-center justify-between mt-1.5">
+<span class="text-caption font-caption text-primary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified">verified</span>
+                  Integrity verified • Ready to publish
+                </span>
+<span class="text-caption font-caption text-secondary font-mono">100% Uploaded (SHA-256 Validated)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 4: Academic Integrity Notice & Submit Actions -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between border-b border-outline-variant pb-space-sm">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-surface-container text-primary font-headline-sm text-xs flex items-center justify-center font-bold">4</span>
+<h2 class="text-headline-sm font-headline-sm text-primary">Academic Integrity Notice &amp; Archival Deposit</h2>
+</div>
+<span class="text-caption font-caption text-secondary">Final Step</span>
+</div>
+<!-- Pale Sage Disclaimer Box -->
+<div class="bg-[#EAF0EB] border border-[#c0c9c2] rounded-lg p-space-md flex gap-3 text-on-surface">
+<span class="material-symbols-outlined text-primary text-xl flex-shrink-0 mt-0.5" data-icon="policy">policy</span>
+<div class="text-body-sm font-body-sm space-y-1">
+<p class="font-semibold text-primary">Campus Honor Code &amp; Institutional Permanence</p>
+<p class="text-on-surface-variant">
+                By publishing, you confirm these materials respect the university academic honor code and contain no unauthorized examination leaks. Published documents cannot be altered or deleted by student accounts to preserve institutional history.
+              </p>
+</div>
+</div>
+<!-- Explicit Checkbox Confirmation -->
+<label class="flex items-start gap-2.5 cursor-pointer">
+<input checked="" class="mt-1 h-4 w-4 rounded border-outline text-primary focus:ring-primary focus:ring-offset-0" type="checkbox"/>
+<span class="text-body-sm font-body-sm text-on-surface">
+              I certify that I hold educational distribution rights or this constitutes fair-use scholarly notes prepared for peer reference under Department regulations.
+            </span>
+</label>
+<!-- Action Buttons Group -->
+<div class="pt-space-sm border-t border-outline-variant flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<button class="px-5 py-2.5 bg-primary text-surface-container-lowest rounded-lg font-label-md text-label-md font-semibold hover:bg-primary-container active:opacity-90 transition-all flex items-center gap-2 shadow-xs" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="archive">archive</span>
+<span>Publish to Campus Archive</span>
+</button>
+<button class="px-4 py-2.5 bg-surface-container-lowest border border-outline-variant text-on-surface rounded-lg font-label-md text-label-md font-medium hover:bg-surface-container-low transition-colors flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary" data-icon="save">save</span>
+<span>Save Draft</span>
+</button>
+</div>
+<button class="text-secondary hover:text-error text-label-md font-label-md transition-colors px-3 py-2" type="button">
+              Cancel
+            </button>
+</div>
+</div>
+</section>
+<!-- RIGHT COLUMN: Guidance & Standards Drawer (~340px) (4 Cols) -->
+<aside class="lg:col-span-4 flex flex-col gap-space-lg">
+<!-- Card: Archival Standards Checklist -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-space-md shadow-sm">
+<div class="flex items-center gap-2 pb-space-sm border-b border-outline-variant mb-space-sm">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="fact_check">fact_check</span>
+<h3 class="text-headline-sm font-headline-sm text-primary text-base">Archival Standards</h3>
+</div>
+<p class="text-body-sm font-body-sm text-secondary mb-space-sm">
+            To ensure archival clarity for the university library, all deposits must conform to basic indexing criteria:
+          </p>
+<ul class="space-y-3">
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5 flex-shrink-0" data-icon="check_box" data-weight="fill">check_box</span>
+<div class="text-body-sm font-body-sm">
+<strong class="text-on-surface block font-semibold">Legible Scans &amp; High DPI</strong>
+<span class="text-secondary">Handwriting must be clearly legible; scans should maintain at least 300 DPI resolution.</span>
+</div>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5 flex-shrink-0" data-icon="check_box" data-weight="fill">check_box</span>
+<div class="text-body-sm font-body-sm">
+<strong class="text-on-surface block font-semibold">Syllabus Unit Tagging</strong>
+<span class="text-secondary">Attach official unit titles to improve retrieval through semester-end search indexes.</span>
+</div>
+</li>
+<li class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5 flex-shrink-0" data-icon="check_box" data-weight="fill">check_box</span>
+<div class="text-body-sm font-body-sm">
+<strong class="text-on-surface block font-semibold">Unofficial Solutions Marking</strong>
+<span class="text-secondary">If student-authored, flag answer keys clearly as "Unofficial / Student Formulated".</span>
+</div>
+</li>
+</ul>
+<div class="mt-space-md pt-space-sm border-t border-outline-variant flex items-center justify-between">
+<span class="text-caption font-caption text-secondary">Review full stylebook</span>
+<a class="text-caption font-caption text-primary font-semibold hover:underline flex items-center" href="#">
+              Library Manual
+              <span class="material-symbols-outlined text-[13px]" data-icon="north_east">north_east</span>
+</a>
+</div>
+</div>
+<!-- Card: What Happens Next? -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-space-md shadow-sm">
+<div class="flex items-center gap-2 pb-space-sm border-b border-outline-variant mb-space-sm">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="schedule">schedule</span>
+<h3 class="text-headline-sm font-headline-sm text-primary text-base">What Happens Next?</h3>
+</div>
+<div class="space-y-space-md">
+<!-- Timeline Item 1: Verified TA Privilege -->
+<div class="flex gap-3 items-start">
+<div class="w-7 h-7 rounded-full bg-primary-fixed/40 border border-primary text-primary flex items-center justify-center flex-shrink-0 text-xs font-bold">
+                TA
+              </div>
+<div>
+<span class="text-label-sm font-label-sm font-semibold text-primary block">Immediate Archival Clearance</span>
+<p class="text-body-sm font-body-sm text-secondary mt-0.5">
+                  Because you are signed in as a verified Teaching Assistant (<strong class="text-on-surface">Marcus S.</strong>), this record will enter the live catalog instantaneously upon clicking publish.
+                </p>
+</div>
+</div>
+<div class="w-full h-[1px] bg-outline-variant"></div>
+<!-- Timeline Item 2: General Peer Review Note -->
+<div class="flex gap-3 items-start">
+<div class="w-7 h-7 rounded-full bg-surface-container border border-outline text-secondary flex items-center justify-center flex-shrink-0 text-xs font-semibold">
+                PR
+              </div>
+<div>
+<span class="text-label-sm font-label-sm font-semibold text-on-surface block">Standard Peer Moderation (~2–4 hrs)</span>
+<p class="text-body-sm font-body-sm text-secondary mt-0.5">
+                  General undergraduate submissions undergo automated OCR checks and community moderator peer verification prior to indexing.
+                </p>
+</div>
+</div>
+</div>
+<!-- Institutional Archival Timestamp -->
+<div class="mt-space-md p-space-xs px-space-sm bg-surface-container-low rounded border border-outline-variant text-caption font-caption text-secondary flex items-center justify-between">
+<span>Archive Server Node:</span>
+<span class="font-mono text-on-surface font-semibold">CAMPUS-EAST-02</span>
+</div>
+</div>
+<!-- Secondary Card: Contributor Ledger Summary -->
+<div class="bg-surface-container-low rounded-xl border border-outline-variant p-space-md">
+<div class="flex items-center justify-between mb-2">
+<span class="text-label-sm font-label-sm font-semibold text-primary">Your Contributor Standing</span>
+<span class="px-2 py-0.5 bg-primary text-surface-container-lowest text-[11px] font-caption font-semibold rounded">Tier 1 Scholar</span>
+</div>
+<div class="grid grid-cols-2 gap-2 text-center my-2">
+<div class="p-2 bg-surface-container-lowest rounded border border-outline-variant">
+<div class="text-headline-sm font-headline-sm text-primary font-bold">18</div>
+<div class="text-caption font-caption text-secondary">Published Notes</div>
+</div>
+<div class="p-2 bg-surface-container-lowest rounded border border-outline-variant">
+<div class="text-headline-sm font-headline-sm text-primary font-bold">1,420</div>
+<div class="text-caption font-caption text-secondary">Student Downloads</div>
+</div>
+</div>
+<p class="text-caption font-caption text-secondary text-center mt-2">
+            Institutional DOI assigned to all verified entries.
+          </p>
+</div>
+</aside>
+</div>
+</main>
+<!-- Shared Component: Footer -->
+<footer class="w-full border-t border-outline-variant bg-surface-container-low mt-space-xl">
+<div class="max-w-[1320px] mx-auto px-gutter md:px-margin py-space-xl flex flex-col md:flex-row justify-between items-center gap-space-md">
+<!-- Brand & Copyright as specified in JSON -->
+<div class="flex flex-col sm:flex-row items-center gap-space-md">
+<a class="text-headline-sm font-headline-sm font-semibold text-primary" href="#">CampusNotes</a>
+<span class="hidden sm:inline text-outline-variant">|</span>
+<p class="text-body-sm font-body-sm text-secondary text-center sm:text-left">
+          © 2025 CampusNotes Academic Repository. All rights reserved.
+        </p>
+</div>
+<!-- Links defined in JSON -->
+<div class="flex flex-wrap items-center justify-center gap-space-md text-label-sm font-label-sm">
+<a class="text-secondary hover:text-primary underline transition-colors duration-150" href="#">Honor Code</a>
+<a class="text-secondary hover:text-primary underline transition-colors duration-150" href="#">Usage Guidelines</a>
+<a class="text-secondary hover:text-primary underline transition-colors duration-150" href="#">Report Policy</a>
+<a class="text-secondary hover:text-primary underline transition-colors duration-150" href="#">Institutional Directory</a>
+<a class="text-secondary hover:text-primary underline transition-colors duration-150" href="#">Contact Archiving Staff</a>
+</div>
+</div>
+</footer>
+</body></html>

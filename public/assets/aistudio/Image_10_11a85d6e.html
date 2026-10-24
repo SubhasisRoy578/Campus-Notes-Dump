@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CampusNotes — Global Search: Data Structures</title>
+<!-- Google Fonts: Inter & Noto Serif -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Noto+Serif:ital,wght@0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config from Design System -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-container": "#285744",
+            "on-primary-fixed": "#002115",
+            "on-primary-fixed-variant": "#204f3d",
+            "error-container": "#ffdad6",
+            "tertiary": "#333936",
+            "on-tertiary-fixed-variant": "#424845",
+            "secondary-container": "#dee4df",
+            "surface-container-high": "#e5e9e4",
+            "surface-tint": "#396753",
+            "inverse-primary": "#a0d1b9",
+            "outline": "#717974",
+            "inverse-on-surface": "#edf2ed",
+            "primary-fixed": "#bbeed4",
+            "surface-container-highest": "#dfe4df",
+            "surface-bright": "#f6fbf5",
+            "on-tertiary-container": "#bcc2bd",
+            "on-secondary": "#ffffff",
+            "error": "#ba1a1a",
+            "on-secondary-fixed": "#171d1a",
+            "on-background": "#181d1a",
+            "surface-variant": "#dfe4df",
+            "on-tertiary": "#ffffff",
+            "surface-dim": "#d7dbd6",
+            "on-surface-variant": "#414944",
+            "tertiary-fixed": "#dee4df",
+            "background": "#f6fbf5",
+            "on-secondary-container": "#606662",
+            "secondary-fixed": "#dee4df",
+            "on-primary-container": "#99cbb3",
+            "on-surface": "#181d1a",
+            "secondary": "#5a605c",
+            "on-primary": "#ffffff",
+            "on-secondary-fixed-variant": "#424845",
+            "tertiary-fixed-dim": "#c2c8c3",
+            "primary": "#0d402e",
+            "surface-container-lowest": "#ffffff",
+            "on-error": "#ffffff",
+            "inverse-surface": "#2c322e",
+            "surface-container-low": "#f0f5f0",
+            "outline-variant": "#c0c9c2",
+            "surface": "#f6fbf5",
+            "secondary-fixed-dim": "#c2c8c3",
+            "on-error-container": "#93000a",
+            "surface-container": "#ebefea",
+            "primary-fixed-dim": "#a0d1b9",
+            "on-tertiary-fixed": "#171d1a",
+            "tertiary-container": "#4a504d"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "gutter": "1.5rem",
+            "gutter-mobile": "1rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem",
+            "margin-mobile": "1.25rem",
+            "space-lg": "1.5rem",
+            "space-sm": "0.5rem",
+            "margin": "3rem",
+            "space-xl": "2.5rem"
+          },
+          "fontFamily": {
+            "headline-md": ["Noto Serif"],
+            "body-md": ["Inter"],
+            "headline-lg-mobile": ["Noto Serif"],
+            "headline-xl": ["Noto Serif"],
+            "caption": ["Inter"],
+            "label-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-sm": ["Noto Serif"],
+            "headline-xl-mobile": ["Noto Serif"],
+            "label-sm": ["Inter"],
+            "headline-lg": ["Noto Serif"]
+          },
+          "fontSize": {
+            "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-xl": ["40px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "caption": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "500" }],
+            "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+            "body-sm": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+            "headline-xl-mobile": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.03em", "fontWeight": "600" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#F8F8F5] text-on-surface antialiased flex flex-col min-h-screen selection:bg-secondary-container selection:text-primary">
+<!-- TOP APP BAR (Shared Component: TopNavBar) -->
+<header class="w-full border-b border-outline-variant bg-surface-container-lowest sticky top-0 z-40">
+<div class="max-w-[1320px] mx-auto px-gutter md:px-margin h-16 flex items-center justify-between gap-space-md">
+<!-- Brand & Search cluster on left -->
+<div class="flex items-center gap-space-lg flex-1 max-w-2xl">
+<a class="text-headline-md font-headline-md font-semibold text-primary tracking-tight whitespace-nowrap flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[26px] text-primary" data-icon="local_library">local_library</span>
+          CampusNotes
+        </a>
+<!-- Search Bar with Query "Data Structures" -->
+<div class="relative w-full max-w-md hidden sm:block">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-secondary">
+<span class="material-symbols-outlined text-[20px]" data-icon="search">search</span>
+</div>
+<input class="w-full pl-9 pr-14 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary transition-colors placeholder-secondary" placeholder="Search resources, topics, course codes..." type="text" value="Data Structures"/>
+<div class="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none">
+<kbd class="text-caption font-caption bg-surface-container text-secondary px-1.5 py-0.5 rounded border border-outline-variant">⌘K</kbd>
+</div>
+</div>
+</div>
+<!-- Navigation Links & Trailing Actions -->
+<nav class="hidden md:flex items-center gap-space-lg">
+<!-- Exact link strings from JSON, 'Browse Resources' active per search page relevance -->
+<a class="text-primary font-semibold border-b-2 border-primary pb-1 text-label-md font-label-md" href="#">Browse Resources</a>
+<a class="text-secondary hover:text-on-surface pb-1 text-label-md font-label-md transition-colors duration-150" href="#">All Subjects</a>
+<a class="text-secondary hover:text-on-surface pb-1 text-label-md font-label-md transition-colors duration-150" href="#">Recently Added</a>
+</nav>
+<!-- Trailing Primary Action & Icons -->
+<div class="flex items-center gap-space-md">
+<button class="hidden lg:inline-flex items-center gap-1.5 bg-primary-container text-on-secondary px-3.5 py-1.5 rounded-lg text-label-md font-label-md hover:bg-primary transition-colors duration-150">
+<span class="material-symbols-outlined text-[18px]" data-icon="upload_file">upload_file</span>
+<span>Upload Resource</span>
+</button>
+<button class="text-secondary hover:text-primary p-1 rounded transition-colors" title="Notifications">
+<span class="material-symbols-outlined text-[22px]" data-icon="notifications">notifications</span>
+</button>
+<button class="text-secondary hover:text-primary p-1 rounded transition-colors" title="User profile photo">
+<span class="material-symbols-outlined text-[24px]" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- BREADCRUMBS & CONTEXT PATH -->
+<div class="w-full border-b border-outline-variant/60 bg-surface-container-low/40">
+<div class="max-w-[1320px] mx-auto px-gutter md:px-margin py-2 text-label-sm font-label-sm text-secondary flex items-center gap-1.5 overflow-x-auto">
+<a class="hover:text-primary transition-colors" href="#">Repository Catalog</a>
+<span>/</span>
+<a class="hover:text-primary transition-colors" href="#">Engineering &amp; Computer Science</a>
+<span>/</span>
+<span class="text-on-surface font-medium">Search Results</span>
+</div>
+</div>
+<!-- SEARCH META BAR -->
+<section class="border-b border-outline-variant bg-surface-container-lowest">
+<div class="max-w-[1320px] mx-auto px-gutter md:px-margin py-5">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+<!-- Summary Text & Active Filter Badges -->
+<div>
+<h1 class="text-headline-sm font-headline-sm text-on-surface flex items-baseline gap-2">
+<span>Search results for</span>
+<span class="italic text-primary font-serif font-semibold">“Data Structures”</span>
+</h1>
+<p class="text-body-sm font-body-sm text-secondary mt-0.5">
+            18 verified academic records found across 3 departments
+          </p>
+<!-- Active Filter Chips -->
+<div class="flex flex-wrap items-center gap-2 mt-3 text-caption font-caption">
+<span class="text-secondary uppercase tracking-wider text-[10px] font-semibold">Active filters:</span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#EAF0EB] text-primary border border-outline-variant/60 rounded">
+<span>Computer Science</span>
+<button class="hover:text-error transition-colors text-[14px] leading-none" title="Remove filter">×</button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-surface-container-low text-secondary border border-outline-variant/60 rounded">
+<span>All Semesters</span>
+</span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-surface-container-low text-secondary border border-outline-variant/60 rounded">
+<span>Notes &amp; Papers</span>
+</span>
+<button class="text-primary hover:underline ml-1 font-semibold text-[11px] transition-colors">
+              Reset Query
+            </button>
+</div>
+</div>
+<!-- Catalog Sorting & View Controls -->
+<div class="flex items-center gap-3 self-start lg:self-center">
+<label class="text-label-sm font-label-sm text-secondary whitespace-nowrap" for="sort-select">Sort by:</label>
+<div class="relative">
+<select class="appearance-none bg-surface-container-lowest border border-outline-variant rounded-lg pl-3 pr-8 py-1.5 text-label-md font-label-md text-on-surface focus:outline-none focus:border-primary cursor-pointer" id="sort-select">
+<option selected="" value="relevance">Relevance</option>
+<option value="newest">Newest First</option>
+<option value="downloads">Most Downloaded</option>
+<option value="rating">Faculty Verified First</option>
+</select>
+<span class="material-symbols-outlined text-[18px] text-secondary absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+<div class="hidden sm:flex border border-outline-variant rounded-lg overflow-hidden bg-surface-container-lowest">
+<button class="p-1.5 bg-secondary-container/50 text-primary border-r border-outline-variant" title="List View">
+<span class="material-symbols-outlined text-[18px]" data-icon="format_list_bulleted">format_list_bulleted</span>
+</button>
+<button class="p-1.5 text-secondary hover:text-on-surface" title="Compact Catalog Ledger">
+<span class="material-symbols-outlined text-[18px]" data-icon="table_rows">table_rows</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- MAIN CANVAS: TWO-COLUMN ASYMMETRIC CATALOG LAYOUT -->
+<main class="flex-1 max-w-[1320px] w-full mx-auto px-gutter md:px-margin py-space-lg">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT COLUMN: FACETED SEARCH FILTERS (~280px / 3 cols) -->
+<aside class="lg:col-span-3 bg-surface-container-lowest border border-outline-variant rounded-xl p-space-md divide-y divide-outline-variant/70">
+<!-- Filter Header -->
+<div class="pb-space-sm flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="tune">tune</span>
+<span class="text-label-md font-label-md font-semibold text-on-surface uppercase tracking-wider text-[12px]">Filter Archives</span>
+</div>
+<button class="text-caption font-caption text-secondary hover:text-primary transition-colors underline">
+            Clear all filters
+          </button>
+</div>
+<!-- Facet: Department -->
+<div class="py-3.5 space-y-2">
+<div class="flex items-center justify-between">
+<span class="text-label-sm font-label-sm font-semibold text-on-surface">Department</span>
+<span class="material-symbols-outlined text-[16px] text-secondary" data-icon="unfold_less">unfold_less</span>
+</div>
+<div class="space-y-1.5 pt-1">
+<label class="flex items-center justify-between text-body-sm font-body-sm text-on-surface hover:text-primary cursor-pointer group">
+<div class="flex items-center gap-2">
+<input checked="" class="w-4 h-4 rounded border-outline text-primary-container focus:ring-primary-container" type="checkbox"/>
+<span class="group-hover:text-primary">Computer Science</span>
+</div>
+<span class="text-caption font-caption text-secondary font-mono">15</span>
+</label>
+<label class="flex items-center justify-between text-body-sm font-body-sm text-on-surface hover:text-primary cursor-pointer group">
+<div class="flex items-center gap-2">
+<input class="w-4 h-4 rounded border-outline text-primary-container focus:ring-primary-container" type="checkbox"/>
+<span class="group-hover:text-primary">Information Science</span>
+</div>
+<span class="text-caption font-caption text-secondary font-mono">3</span>
+</label>
+</div>
+</div>
+<!-- Facet: Academic Year -->
+<div class="py-3.5 space-y-2">
+<div class="flex items-center justify-between">
+<span class="text-label-sm font-label-sm font-semibold text-on-surface">Academic Year</span>
+<span class="material-symbols-outlined text-[16px] text-secondary" data-icon="unfold_less">unfold_less</span>
+</div>
+<div class="space-y-1.5 pt-1">
+<label class="flex items-center justify-between text-body-sm font-body-sm text-on-surface hover:text-primary cursor-pointer group">
+<div class="flex items-center gap-2">
+<input class="w-4 h-4 rounded border-outline text-primary-container focus:ring-primary-container" type="checkbox"/>
+<span class="group-hover:text-primary">1st Year</span>
+</div>
+<span class="text-caption font-caption text-secondary font-mono">2</span>
+</label>
+<label class="flex items-center justify-between text-body-sm font-body-sm text-on-surface hover:text-primary cursor-pointer group">
+<div class="flex items-center gap-2">
+<input checked="" class="w-4 h-4 rounded border-outline text-primary-container focus:ring-primary-container" type="checkbox"/>
+<span class="font-medium group-hover:text-primary">2nd Year</span>
+</div>
+<span class="text-caption font-caption text-secondary font-mono">12</span>
+</label>
+<label class="flex items-center justify-between text-body-sm font-body-sm text-on-surface hover:text-primary cursor-pointer group">
+<div class="flex items-center gap-2">
+<input class="w-4 h-4 rounded border-outline text-primary-container focus:ring-primary-container" type="checkbox"/>
+<span class="group-hover:text-primary">3rd Year</span>
+</div>
+<span class="text-caption font-caption text-secondary font-mono">4</span>
+</label>
+<label class="flex items-center justify-between text-body-sm font-body-sm text-outline cursor-not-allowed">
+<div class="flex items-center gap-2">
+<input class="w-4 h-4 rounded border-outline-variant bg-surface-container text-secondary" disabled="" type="checkbox"/>
+<span>4th Year</span>
+</div>
+<span class="text-caption font-caption text-outline font-mono">0</span>
+</label>
+</div>
+</div>
+<!-- Facet: Semester -->
+<div class="py-3.5 space-y-2">
+<div class="flex items-center justify-between">
+<span class="text-label-sm font-label-sm font-semibold text-on-surface">Semester</span>
+<span class="material-symbols-outlined text-[16px] text-secondary" data-icon="unfold_less">unfold_less</span>
+</div>
+<div class="grid grid-cols-2 gap-2 pt-1">
+<label class="flex items-center justify-between text-body-sm font-body-sm text-on-surface cursor-pointer p-1 rounded hover:bg-surface-container-low">
+<div class="flex items-center gap-1.5">
+<input class="w-3.5 h-3.5 rounded border-outline text-primary-container" type="checkbox"/>
+<span>Sem 1</span>
+</div>
+<span class="text-caption font-caption text-secondary font-mono">1</span>
+</label>
+<label class="flex items-center justify-between text-body-sm font-body-sm text-on-surface cursor-pointer p-1 rounded hover:bg-surface-container-low">
+<div class="flex items-center gap-1.5">
+<input class="w-3.5 h-3.5 rounded border-outline text-primary-container" type="checkbox"/>
+<span>Sem 2</span>
+</div>
+<span class="text-caption font-caption text-secondary font-mono">1</span>
+</label>
+<label class="flex items-center justify-between text-body-sm font-body-sm text-on-surface cursor-pointer p-1 bg-[#EAF0EB]/50 rounded">
+<div class="flex items-center gap-1.5">
+<input checked="" class="w-3.5 h-3.5 rounded border-outline text-primary-container" type="checkbox"/>
+<span class="font-medium text-primary">Sem 3</span>
+</div>
+<span class="text-caption font-caption text-primary font-mono font-semibold">10</span>
+</label>
+<label class="flex items-center justify-between text-body-sm font-body-sm text-on-surface cursor-pointer p-1 rounded hover:bg-surface-container-low">
+<div class="flex items-center gap-1.5">
+<input class="w-3.5 h-3.5 rounded border-outline text-primary-container" type="checkbox"/>
+<span>Sem 4</span>
+</div>
+<span class="text-caption font-caption text-secondary font-mono">2</span>
+</label>
+<label class="flex items-center justify-between text-body-sm font-body-sm text-on-surface cursor-pointer p-1 rounded hover:bg-surface-container-low">
+<div class="flex items-center gap-1.5">
+<input class="w-3.5 h-3.5 rounded border-outline text-primary-container" type="checkbox"/>
+<span>Sem 5</span>
+</div>
+<span class="text-caption font-caption text-secondary font-mono">4</span>
+</label>
+<label class="flex items-center justify-between text-body-sm font-body-sm text-outline cursor-not-allowed p-1">
+<div class="flex items-center gap-1.5">
+<input class="w-3.5 h-3.5 rounded border-outline-variant bg-surface-container" disabled="" type="checkbox"/>
+<span>Sem 6</span>
+</div>
+<span class="text-caption font-caption text-outline font-mono">0</span>
+</label>
+</div>
+</div>
+<!-- Facet: Resource Type -->
+<div class="py-3.5 space-y-2">
+<div class="flex items-center justify-between">
+<span class="text-label-sm font-label-sm font-semibold text-on-surface">Resource Type</span>
+<span class="material-symbols-outlined text-[16px] text-secondary" data-icon="unfold_less">unfold_less</span>
+</div>
+<div class="space-y-1.5 pt-1">
+<label class="flex items-center justify-between text-body-sm font-body-sm text-on-surface hover:text-primary cursor-pointer group">
+<div class="flex items-center gap-2">
+<input checked="" class="w-4 h-4 rounded border-outline text-primary-container focus:ring-primary-container" type="checkbox"/>
+<span class="group-hover:text-primary">Lecture Notes</span>
+</div>
+<span class="text-caption font-caption text-secondary font-mono">9</span>
+</label>
+<label class="flex items-center justify-between text-body-sm font-body-sm text-on-surface hover:text-primary cursor-pointer group">
+<div class="flex items-center gap-2">
+<input checked="" class="w-4 h-4 rounded border-outline text-primary-container focus:ring-primary-container" type="checkbox"/>
+<span class="group-hover:text-primary">Question Papers</span>
+</div>
+<span class="text-caption font-caption text-secondary font-mono">5</span>
+</label>
+<label class="flex items-center justify-between text-body-sm font-body-sm text-on-surface hover:text-primary cursor-pointer group">
+<div class="flex items-center gap-2">
+<input class="w-4 h-4 rounded border-outline text-primary-container focus:ring-primary-container" type="checkbox"/>
+<span class="group-hover:text-primary">Lab Manuals</span>
+</div>
+<span class="text-caption font-caption text-secondary font-mono">2</span>
+</label>
+<label class="flex items-center justify-between text-body-sm font-body-sm text-on-surface hover:text-primary cursor-pointer group">
+<div class="flex items-center gap-2">
+<input class="w-4 h-4 rounded border-outline text-primary-container focus:ring-primary-container" type="checkbox"/>
+<span class="group-hover:text-primary">Reference Sheets</span>
+</div>
+<span class="text-caption font-caption text-secondary font-mono">2</span>
+</label>
+</div>
+</div>
+<!-- Facet: File Format -->
+<div class="pt-3.5 space-y-2">
+<div class="flex items-center justify-between">
+<span class="text-label-sm font-label-sm font-semibold text-on-surface">File Format</span>
+<span class="material-symbols-outlined text-[16px] text-secondary" data-icon="unfold_less">unfold_less</span>
+</div>
+<div class="space-y-1.5 pt-1">
+<label class="flex items-center justify-between text-body-sm font-body-sm text-on-surface hover:text-primary cursor-pointer group">
+<div class="flex items-center gap-2">
+<input checked="" class="w-4 h-4 rounded border-outline text-primary-container focus:ring-primary-container" type="checkbox"/>
+<span class="group-hover:text-primary font-mono text-[13px]">PDF Document</span>
+</div>
+<span class="text-caption font-caption text-secondary font-mono">16</span>
+</label>
+<label class="flex items-center justify-between text-body-sm font-body-sm text-on-surface hover:text-primary cursor-pointer group">
+<div class="flex items-center gap-2">
+<input class="w-4 h-4 rounded border-outline text-primary-container focus:ring-primary-container" type="checkbox"/>
+<span class="group-hover:text-primary font-mono text-[13px]">DOCX Editable</span>
+</div>
+<span class="text-caption font-caption text-secondary font-mono">2</span>
+</label>
+</div>
+</div>
+<!-- Archival Verification Notice -->
+<div class="pt-4 mt-2">
+<div class="p-3 bg-[#EAF0EB]/60 rounded-lg border border-outline-variant/60 flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5" data-icon="verified">verified</span>
+<p class="text-caption font-caption text-on-surface-variant leading-relaxed">
+              All indexed records conform to institutional archiving standards and academic honor code integrity.
+            </p>
+</div>
+</div>
+</aside>
+<!-- RIGHT MAIN COLUMN: SEARCH RESULTS STREAM (9 cols) -->
+<section class="lg:col-span-9 space-y-space-md">
+<!-- RESULT CARD 1 -->
+<article class="bg-surface-container-lowest border border-outline-variant hover:border-[#C8CCC5] rounded-lg transition-all duration-150 p-space-md hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(32,37,34,0.04)]">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+<!-- Details -->
+<div class="space-y-1.5 flex-1">
+<div class="flex flex-wrap items-center gap-2">
+<span class="bg-[#EAF0EB] text-primary text-[11px] font-semibold px-2 py-0.5 rounded font-mono">CS201</span>
+<span class="text-caption font-caption text-secondary border border-outline-variant px-1.5 py-0.25 rounded">Sem 3</span>
+<span class="text-caption font-caption text-secondary font-mono">Updated Oct 4, 2024</span>
+<span class="inline-flex items-center gap-1 text-caption font-caption text-primary font-medium">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+                  Verified Syllabus Match
+                </span>
+</div>
+<h2 class="text-headline-sm font-headline-sm text-on-surface hover:text-primary transition-colors cursor-pointer pt-0.5">
+<span class="font-semibold text-primary">CS201: Data Structures</span> — Complete AVL &amp; B-Tree Balanced Search Trees Guide
+              </h2>
+<p class="text-body-sm font-body-sm text-secondary line-clamp-2">
+                Rigorous algorithmic reference covering tree rotations, balance factors, multi-way branching heuristics, deletion re-balancing cases, and amortized complexity bounds with full proof sketches.
+              </p>
+<!-- Metadata horizontal footer -->
+<div class="flex flex-wrap items-center gap-4 text-caption font-caption text-secondary pt-2">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-error" data-icon="picture_as_pdf">picture_as_pdf</span>
+                  PDF (3.7 MB)
+                </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="download">download</span>
+                  482 downloads
+                </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="account_balance">account_balance</span>
+                  Dept. of Computer Science
+                </span>
+<span class="text-outline font-mono">BibTeX: cs201-avl-2024</span>
+</div>
+</div>
+<!-- Action buttons -->
+<div class="flex sm:flex-col gap-2 shrink-0 sm:min-w-[110px] pt-2 sm:pt-0">
+<button class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-1.5 bg-primary-container text-on-secondary rounded-lg text-label-md font-label-md hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="download">download</span>
+<span>Download</span>
+</button>
+<button class="flex-1 inline-flex items-center justify-center gap-1 px-3 py-1.5 bg-surface-container-lowest border border-outline-variant text-on-surface rounded-lg text-label-md font-label-md hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[16px] text-secondary" data-icon="visibility">visibility</span>
+<span>Preview</span>
+</button>
+</div>
+</div>
+</article>
+<!-- RESULT CARD 2: Question Paper Archive -->
+<article class="bg-surface-container-lowest border border-outline-variant hover:border-[#C8CCC5] rounded-lg transition-all duration-150 p-space-md hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(32,37,34,0.04)]">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+<div class="space-y-1.5 flex-1">
+<div class="flex flex-wrap items-center gap-2">
+<span class="bg-[#EAF0EB] text-primary text-[11px] font-semibold px-2 py-0.5 rounded font-mono">CS201</span>
+<span class="bg-surface-container-high text-on-surface-variant text-[11px] font-semibold px-2 py-0.5 rounded">PYQ Archive</span>
+<span class="text-caption font-caption text-secondary border border-outline-variant px-1.5 py-0.25 rounded">6 Semesters</span>
+<span class="inline-flex items-center gap-1 text-caption font-caption text-amber-700 font-medium bg-[#FEF3C7] px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-[13px]" data-icon="grade">grade</span>
+                  Includes Official Marking Scheme
+                </span>
+</div>
+<h2 class="text-headline-sm font-headline-sm text-on-surface hover:text-primary transition-colors cursor-pointer pt-0.5">
+<span class="font-semibold text-primary">CS201: Midterm &amp; End-Semester Data Structures Examination Papers (2018-2023)</span>
+</h2>
+<p class="text-body-sm font-body-sm text-secondary line-clamp-2">
+                Consolidated university past papers indexed chronologically. Features model recursive solutions, hashing collision analysis problems, and recurrence tree proofs from departmental examiners.
+              </p>
+<div class="flex flex-wrap items-center gap-4 text-caption font-caption text-secondary pt-2">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-error" data-icon="picture_as_pdf">picture_as_pdf</span>
+                  PDF (5.1 MB)
+                </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="download">download</span>
+                  1,240 downloads
+                </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="menu_book">menu_book</span>
+                  Examinations Board Catalog
+                </span>
+<span class="text-outline font-mono">DOI: 10.academic/cs201-pyq</span>
+</div>
+</div>
+<div class="flex sm:flex-col gap-2 shrink-0 sm:min-w-[110px] pt-2 sm:pt-0">
+<button class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-1.5 bg-primary-container text-on-secondary rounded-lg text-label-md font-label-md hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="download">download</span>
+<span>Download</span>
+</button>
+<button class="flex-1 inline-flex items-center justify-center gap-1 px-3 py-1.5 bg-surface-container-lowest border border-outline-variant text-on-surface rounded-lg text-label-md font-label-md hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[16px] text-secondary" data-icon="visibility">visibility</span>
+<span>Preview</span>
+</button>
+</div>
+</div>
+</article>
+<!-- RESULT CARD 3: Lab Manual -->
+<article class="bg-surface-container-lowest border border-outline-variant hover:border-[#C8CCC5] rounded-lg transition-all duration-150 p-space-md hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(32,37,34,0.04)]">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+<div class="space-y-1.5 flex-1">
+<div class="flex flex-wrap items-center gap-2">
+<span class="bg-[#EAF0EB] text-primary text-[11px] font-semibold px-2 py-0.5 rounded font-mono">CS201</span>
+<span class="text-caption font-caption text-secondary border border-outline-variant px-1.5 py-0.25 rounded">Lab Manual</span>
+<span class="inline-flex items-center gap-1 text-caption font-caption text-primary font-medium bg-[#EAF0EB] px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-[14px]" data-icon="fact_check">fact_check</span>
+                  Verified by Faculty
+                </span>
+<span class="text-caption font-caption text-secondary font-mono">GCC 11+ Ready</span>
+</div>
+<h2 class="text-headline-sm font-headline-sm text-on-surface hover:text-primary transition-colors cursor-pointer pt-0.5">
+<span class="font-semibold text-primary">CS201: Data Structures Lab Manual &amp; C++ Implementation Templates</span>
+</h2>
+<p class="text-body-sm font-body-sm text-secondary line-clamp-2">
+                Fourteen laboratory exercises containing starter boilerplate, valgrind memory leak checking protocols, Dijkstra shortest-path algorithms, and min-heap priority queue implementations.
+              </p>
+<div class="flex flex-wrap items-center gap-4 text-caption font-caption text-secondary pt-2">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-error" data-icon="picture_as_pdf">picture_as_pdf</span>
+                  PDF (1.9 MB)
+                </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="code">code</span>
+                  Includes Raw .CPP / Makefile
+                </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="download">download</span>
+                  614 downloads
+                </span>
+</div>
+</div>
+<div class="flex sm:flex-col gap-2 shrink-0 sm:min-w-[110px] pt-2 sm:pt-0">
+<button class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-1.5 bg-primary-container text-on-secondary rounded-lg text-label-md font-label-md hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="download">download</span>
+<span>Download</span>
+</button>
+<button class="flex-1 inline-flex items-center justify-center gap-1 px-3 py-1.5 bg-surface-container-lowest border border-outline-variant text-on-surface rounded-lg text-label-md font-label-md hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[16px] text-secondary" data-icon="visibility">visibility</span>
+<span>Preview</span>
+</button>
+</div>
+</div>
+</article>
+<!-- RESULT CARD 4: Lecture Notes Sem 5 -->
+<article class="bg-surface-container-lowest border border-outline-variant hover:border-[#C8CCC5] rounded-lg transition-all duration-150 p-space-md hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(32,37,34,0.04)]">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+<div class="space-y-1.5 flex-1">
+<div class="flex flex-wrap items-center gap-2">
+<span class="bg-[#EAF0EB] text-primary text-[11px] font-semibold px-2 py-0.5 rounded font-mono">CS302</span>
+<span class="text-caption font-caption text-secondary border border-outline-variant px-1.5 py-0.25 rounded">Sem 5</span>
+<span class="bg-surface-container text-secondary text-[11px] px-2 py-0.5 rounded">Lecture Notes</span>
+<span class="text-caption font-caption text-secondary font-mono">Prof. A. Vance</span>
+</div>
+<h2 class="text-headline-sm font-headline-sm text-on-surface hover:text-primary transition-colors cursor-pointer pt-0.5">
+<span class="font-semibold text-primary">CS302: Advanced Data Structures &amp; Memory Hierarchies</span>
+</h2>
+<p class="text-body-sm font-body-sm text-secondary line-clamp-2">
+                Upper-division notes focusing on cache-oblivious algorithms, van Emde Boas trees, splay trees, persistent data structures, and spatial index structures (R-Trees &amp; k-d Trees).
+              </p>
+<div class="flex flex-wrap items-center gap-4 text-caption font-caption text-secondary pt-2">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-error" data-icon="picture_as_pdf">picture_as_pdf</span>
+                  PDF (4.2 MB)
+                </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="download">download</span>
+                  329 downloads
+                </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="calendar_today">calendar_today</span>
+                  Fall 2024 Archive
+                </span>
+</div>
+</div>
+<div class="flex sm:flex-col gap-2 shrink-0 sm:min-w-[110px] pt-2 sm:pt-0">
+<button class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-1.5 bg-primary-container text-on-secondary rounded-lg text-label-md font-label-md hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="download">download</span>
+<span>Download</span>
+</button>
+<button class="flex-1 inline-flex items-center justify-center gap-1 px-3 py-1.5 bg-surface-container-lowest border border-outline-variant text-on-surface rounded-lg text-label-md font-label-md hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[16px] text-secondary" data-icon="visibility">visibility</span>
+<span>Preview</span>
+</button>
+</div>
+</div>
+</article>
+<!-- RESULT CARD 5: Unit Summary -->
+<article class="bg-surface-container-lowest border border-outline-variant hover:border-[#C8CCC5] rounded-lg transition-all duration-150 p-space-md hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(32,37,34,0.04)]">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+<div class="space-y-1.5 flex-1">
+<div class="flex flex-wrap items-center gap-2">
+<span class="bg-[#EAF0EB] text-primary text-[11px] font-semibold px-2 py-0.5 rounded font-mono">CS201</span>
+<span class="text-caption font-caption text-secondary border border-outline-variant px-1.5 py-0.25 rounded">Notes</span>
+<span class="text-caption font-caption text-secondary font-mono">Unit 1 Review</span>
+</div>
+<h2 class="text-headline-sm font-headline-sm text-on-surface hover:text-primary transition-colors cursor-pointer pt-0.5">
+<span class="font-semibold text-primary">CS201: Linear Data Structures (Stacks, Queues, Deques) - Unit 1 Summary</span>
+</h2>
+<p class="text-body-sm font-body-sm text-secondary line-clamp-2">
+                Concise student study guide reviewing array-based vs pointer-linked queue dynamics, circular buffers, infix-to-postfix conversion algorithms, and bracket balancing validation.
+              </p>
+<div class="flex flex-wrap items-center gap-4 text-caption font-caption text-secondary pt-2">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-error" data-icon="picture_as_pdf">picture_as_pdf</span>
+                  PDF (1.4 MB)
+                </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="download">download</span>
+                  891 downloads
+                </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="history_edu">history_edu</span>
+                  Peer Reviewed
+                </span>
+</div>
+</div>
+<div class="flex sm:flex-col gap-2 shrink-0 sm:min-w-[110px] pt-2 sm:pt-0">
+<button class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-1.5 bg-primary-container text-on-secondary rounded-lg text-label-md font-label-md hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="download">download</span>
+<span>Download</span>
+</button>
+<button class="flex-1 inline-flex items-center justify-center gap-1 px-3 py-1.5 bg-surface-container-lowest border border-outline-variant text-on-surface rounded-lg text-label-md font-label-md hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[16px] text-secondary" data-icon="visibility">visibility</span>
+<span>Preview</span>
+</button>
+</div>
+</div>
+</article>
+<!-- PAGINATION BAR -->
+<div class="pt-space-sm border-t border-outline-variant flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="text-body-sm font-body-sm text-secondary">
+            Showing <span class="font-medium text-on-surface font-mono">1 – 5</span> of <span class="font-medium text-on-surface font-mono">18</span> results
+          </div>
+<div class="flex items-center gap-1">
+<button class="px-2.5 py-1 text-outline cursor-not-allowed text-label-sm font-label-sm rounded flex items-center gap-1" disabled="">
+<span class="material-symbols-outlined text-[16px]" data-icon="chevron_left">chevron_left</span>
+              Previous
+            </button>
+<button class="w-8 h-8 rounded bg-primary-container text-on-secondary font-mono font-medium text-body-sm">
+              1
+            </button>
+<button class="w-8 h-8 rounded text-secondary hover:bg-surface-container-high hover:text-on-surface font-mono text-body-sm transition-colors">
+              2
+            </button>
+<button class="w-8 h-8 rounded text-secondary hover:bg-surface-container-high hover:text-on-surface font-mono text-body-sm transition-colors">
+              3
+            </button>
+<button class="w-8 h-8 rounded text-secondary hover:bg-surface-container-high hover:text-on-surface font-mono text-body-sm transition-colors">
+              4
+            </button>
+<button class="px-2.5 py-1 text-primary hover:bg-surface-container text-label-sm font-label-sm font-semibold rounded flex items-center gap-1 transition-colors">
+              Next
+              <span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Citation & Export Floating Banner -->
+<div class="p-4 bg-surface-container-lowest border border-outline-variant rounded-lg flex items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[24px] text-primary" data-icon="format_quote">format_quote</span>
+<div>
+<p class="text-label-md font-label-md font-semibold text-on-surface">Exporting Search Citations</p>
+<p class="text-caption font-caption text-secondary">Generate bulk bibliography entries in APA, MLA, or BibTeX for all 18 records.</p>
+</div>
+</div>
+<button class="px-3 py-1.5 bg-surface-container text-primary border border-outline-variant rounded text-label-md font-label-md hover:bg-surface-container-high transition-colors whitespace-nowrap">
+            Export Results
+          </button>
+</div>
+</section>
+</div>
+</main>
+<!-- FOOTER (Shared Component: Footer) -->
+<footer class="w-full border-t border-outline-variant bg-surface-container-low mt-space-xl">
+<div class="max-w-[1320px] mx-auto px-gutter md:px-margin py-space-xl flex flex-col md:flex-row justify-between items-center gap-space-md">
+<!-- Brand & Copyright -->
+<div class="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+<span class="text-headline-sm font-headline-sm font-semibold text-primary">CampusNotes</span>
+<span class="hidden sm:inline text-outline">•</span>
+<!-- Literal copyright_text from JSON -->
+<p class="text-body-sm font-body-sm text-secondary">
+          © 2025 CampusNotes Academic Repository. All rights reserved.
+        </p>
+</div>
+<!-- Links (Exact link strings from JSON) -->
+<div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-label-sm font-label-sm text-secondary">
+<a class="hover:text-primary underline transition-colors duration-150" href="#">Honor Code</a>
+<a class="hover:text-primary underline transition-colors duration-150" href="#">Usage Guidelines</a>
+<a class="hover:text-primary underline transition-colors duration-150" href="#">Report Policy</a>
+<a class="hover:text-primary underline transition-colors duration-150" href="#">Institutional Directory</a>
+<a class="hover:text-primary underline transition-colors duration-150" href="#">Contact Archiving Staff</a>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,38 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && (
+        request.auth.token.role == 'faculty_admin' ||
+        request.auth.token.admin == true
+      );
+    }
+    
+    // Academic Resources Storage Bucket
+    // Structure: /resources/{year}/{semester}/{subjectId}/{filename}
+    match /resources/{allPaths=**} {
+      // Public read allowed for published files
+      allow read: if true;
+      
+      // Upload allowed only for authenticated scholars with valid types and <= 25MB
+      allow create: if isAuthenticated()
+                    && request.resource.size <= 25 * 1024 * 1024
+                    && (
+                      request.resource.contentType.matches('application/pdf') ||
+                      request.resource.contentType.matches('application/msword') ||
+                      request.resource.contentType.matches('application/vnd.openxmlformats-officedocument.wordprocessingml.document') ||
+                      request.resource.contentType.matches('text/plain') ||
+                      request.resource.contentType.matches('image/png') ||
+                      request.resource.contentType.matches('image/jpeg')
+                    );
+                    
+      // Published files cannot be overwritten or deleted by normal users
+      allow update, delete: if isAdmin();
+    }
+  }
+}

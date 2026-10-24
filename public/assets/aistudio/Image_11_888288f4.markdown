@@ -1,0 +1,221 @@
+---
+name: Academic Editorial
+colors:
+  surface: '#f6fbf5'
+  surface-dim: '#d7dbd6'
+  surface-bright: '#f6fbf5'
+  surface-container-lowest: '#ffffff'
+  surface-container-low: '#f0f5f0'
+  surface-container: '#ebefea'
+  surface-container-high: '#e5e9e4'
+  surface-container-highest: '#dfe4df'
+  on-surface: '#181d1a'
+  on-surface-variant: '#414944'
+  inverse-surface: '#2c322e'
+  inverse-on-surface: '#edf2ed'
+  outline: '#717974'
+  outline-variant: '#c0c9c2'
+  surface-tint: '#396753'
+  primary: '#0d402e'
+  on-primary: '#ffffff'
+  primary-container: '#285744'
+  on-primary-container: '#99cbb3'
+  inverse-primary: '#a0d1b9'
+  secondary: '#5a605c'
+  on-secondary: '#ffffff'
+  secondary-container: '#dee4df'
+  on-secondary-container: '#606662'
+  tertiary: '#333936'
+  on-tertiary: '#ffffff'
+  tertiary-container: '#4a504d'
+  on-tertiary-container: '#bcc2bd'
+  error: '#ba1a1a'
+  on-error: '#ffffff'
+  error-container: '#ffdad6'
+  on-error-container: '#93000a'
+  primary-fixed: '#bbeed4'
+  primary-fixed-dim: '#a0d1b9'
+  on-primary-fixed: '#002115'
+  on-primary-fixed-variant: '#204f3d'
+  secondary-fixed: '#dee4df'
+  secondary-fixed-dim: '#c2c8c3'
+  on-secondary-fixed: '#171d1a'
+  on-secondary-fixed-variant: '#424845'
+  tertiary-fixed: '#dee4df'
+  tertiary-fixed-dim: '#c2c8c3'
+  on-tertiary-fixed: '#171d1a'
+  on-tertiary-fixed-variant: '#424845'
+  background: '#f6fbf5'
+  on-background: '#181d1a'
+  surface-variant: '#dfe4df'
+typography:
+  headline-xl:
+    fontFamily: Noto Serif
+    fontSize: 40px
+    fontWeight: '600'
+    lineHeight: 52px
+    letterSpacing: -0.02em
+  headline-xl-mobile:
+    fontFamily: Noto Serif
+    fontSize: 30px
+    fontWeight: '600'
+    lineHeight: 38px
+    letterSpacing: -0.015em
+  headline-lg:
+    fontFamily: Noto Serif
+    fontSize: 32px
+    fontWeight: '600'
+    lineHeight: 40px
+    letterSpacing: -0.015em
+  headline-lg-mobile:
+    fontFamily: Noto Serif
+    fontSize: 24px
+    fontWeight: '600'
+    lineHeight: 32px
+    letterSpacing: -0.01em
+  headline-md:
+    fontFamily: Noto Serif
+    fontSize: 24px
+    fontWeight: '600'
+    lineHeight: 32px
+    letterSpacing: -0.01em
+  headline-sm:
+    fontFamily: Noto Serif
+    fontSize: 20px
+    fontWeight: '500'
+    lineHeight: 28px
+  body-lg:
+    fontFamily: Inter
+    fontSize: 18px
+    fontWeight: '400'
+    lineHeight: 28px
+    letterSpacing: -0.005em
+  body-md:
+    fontFamily: Inter
+    fontSize: 15px
+    fontWeight: '400'
+    lineHeight: 24px
+  body-sm:
+    fontFamily: Inter
+    fontSize: 13px
+    fontWeight: '400'
+    lineHeight: 20px
+  label-md:
+    fontFamily: Inter
+    fontSize: 14px
+    fontWeight: '500'
+    lineHeight: 20px
+    letterSpacing: 0.01em
+  label-sm:
+    fontFamily: Inter
+    fontSize: 12px
+    fontWeight: '600'
+    lineHeight: 16px
+    letterSpacing: 0.03em
+  caption:
+    fontFamily: Inter
+    fontSize: 11px
+    fontWeight: '500'
+    lineHeight: 14px
+    letterSpacing: 0.04em
+rounded:
+  sm: 0.125rem
+  DEFAULT: 0.25rem
+  md: 0.375rem
+  lg: 0.5rem
+  xl: 0.75rem
+  full: 9999px
+spacing:
+  gutter: 1.5rem
+  gutter-mobile: 1rem
+  margin: 3rem
+  margin-mobile: 1.25rem
+  space-xs: 0.25rem
+  space-sm: 0.5rem
+  space-md: 1rem
+  space-lg: 1.5rem
+  space-xl: 2.5rem
+---
+
+## Brand & Style
+
+This design system embodies the quiet prestige, precision, and focus of a modern university research archive. Designed for scholars, researchers, and university students seeking high-value academic materials, the interface avoids trendy digital distractions in favor of archival clarity, tactile paper-like contrast, and structured metadata presentation.
+
+The aesthetic fuses contemporary institutional minimalism with classic collegiate publishing. Visual weight is communicated through disciplined typographic contrast, ruled lines, and precise rectangular layouts rather than decorative ornament. Interactions feel stable, deliberate, and respectful of deep reading and synthesis.
+
+## Colors
+
+The palette establishes an intellectual, grounded atmosphere rooted in historical collegiate libraries and natural archival materials.
+
+- **Canvas Background (`#F8F8F5`):** A warm, unbleached paper tone that prevents eye strain across long reading sessions.
+- **Card and Elevated Surfaces (`#FFFFFF`):** Pure bright white used for content sheets, primary reading modules, and modal dialogs to establish crisp figure-ground separation.
+- **Primary Accent (`#285744`):** Oxford forest green, signifying institutional authority, applied exclusively to primary actions, active navigation states, selected facets, and verified institution identifiers.
+- **Pale Accent Base (`#EAF0EB`):** Muted sage tint for tag containers, secondary highlights, subtle search backgrounds, and selected table rows.
+- **Neutral Primary (`#202522`):** Dense charcoal for all body copy and primary titles, ensuring high legibility without the harshness of pure black.
+- **Neutral Secondary (`#747A76`):** Balanced graphite slate for metadata labels, citations, pagination, and auxiliary notes.
+- **Structural Dividers (`#E5E7E2`):** Warm gray hairpins used for razor-thin 1px separation lines across grids, tables, and borders.
+- **System Feedback:** Restrained amber (`#D97706`) for peer-review holds or embargo warnings; archival crimson (`#DC2626`) for critical error states and expired access indicators.
+
+## Typography
+
+Typography establishes an editorial rhythm through pairing a distinguished literary serif with an analytical sans-serif.
+
+- **Display & Section Headings (`Noto Serif`):** Reserved strictly for document titles, page headers, author bylines, and editorial curation sections. Features restrained optical weights (500–600) with deliberate line heights to maintain a scholarly journal aesthetic.
+- **Interface & Body (`Inter`):** Deployed for all interactive controls, data tables, catalog filters, document abstracts, and metadata labels. The neutral geometry ensures high density, instant parsing, and pristine legibility at scale.
+- **Metadata Treatment:** Citations, DOI numbers, and bibliographic tags utilize `label-sm` or `caption` with modest letter spacing in medium or semibold weights to preserve crisp rendering against tinted containers.
+
+## Layout & Spacing
+
+The layout philosophy follows a structured fixed-max grid inspired by print broadsheets and catalog indexes. Content wraps inside a centered container with a maximum width of `1320px`.
+
+- **Grid System:** A classic 12-column grid on desktop with `1.5rem` (`24px`) gutters and `3rem` (`48px`) canvas margins. Elements collapse into an 8-column layout on tablet (`768px - 1023px`) and a 4-column layout on mobile (`<768px`) with `1rem` gutters and `1.25rem` margins.
+- **Rhythm & Cadence:** Vertical spacing follows a disciplined linear scale derived from `4px` increments (`space-xs: 4px`, `space-sm: 8px`, `space-md: 16px`, `space-lg: 24px`, `space-xl: 40px`). Group related metadata closely using `space-xs` and `space-sm`, reserving `space-xl` for sectional transitions between content catalogs and document metadata summaries.
+- **Data Density:** Maintain strict horizontal rhythm inside lists and tables: uniform cell padding, explicit column widths for standardized data (dates, file extensions, access status), and left-aligned textual hierarchies.
+
+## Elevation & Depth
+
+This design system deliberately eschews heavy dropped shadows, colored glow halos, and floating glass layers. Depth is constructed through flat, tactile layering reminiscent of physical papers resting on library carrels.
+
+- **Surface Tiers:**
+  - Base: Warm canvas `#F8F8F5`.
+  - Tier 1 (Content Plates): Crisp `#FFFFFF` surface enclosed by a hairline `1px` border in `#E5E7E2`.
+  - Tier 2 (Interactive Flyouts & Overlays): `#FFFFFF` bounded by `#E5E7E2` paired with an ultra-subtle, neutral ambient shadow: `0 4px 12px rgba(32, 37, 34, 0.05)`.
+- **Dividers & Outlines:** Separation is conveyed via thin `1px` borders rather than tonal changes. Internal list items and table rows use standard `1px solid #E5E7E2` rules to organize information into ledger-like clarity.
+
+## Shapes
+
+The geometry of the interface is sharp, disciplined, and utilitarian, echoing index cards, bound volumes, and formal institutional forms.
+
+- **Base Radius (0.25rem / 4px - 6px):** Standard controls, input text fields, metadata badges, and small interactive buttons use a tight radius.
+- **Container Radius (0.5rem / 8px):** Primary document cards, preview viewports, dialog sheets, and content modules use 8px max (`rounded-lg`), retaining structural posture without appearing toy-like or overly rounded.
+- **Pill Exceptions:** Restricted strictly to quick status dots or micro-counter caps; full pill-shaped buttons are explicitly prohibited to maintain formal editorial seriousness.
+
+## Components
+
+### Buttons
+- **Primary:** Dark academic forest green (`#285744`) background with `#FFFFFF` text. Flat finish, zero drop shadow, 6px border radius, font `label-md`. Hover state shifts to a deeper forest green (`#1E4334`). Focus state uses a 2px offset ring in `#285744`.
+- **Secondary:** Clean white (`#FFFFFF`) background with a crisp `1px solid #E5E7E2` border and `#202522` text. Hover transitions to `#F8F8F5`.
+- **Tertiary / Ghost:** No background or border; `#285744` text with an underline appearing strictly on hover. Used for citations, download mirrors, and inline footnotes.
+
+### Academic Badge Chips
+- **Taxonomy & Category Badges:** Pale sage background (`#EAF0EB`), dark green text (`#285744`), `1px solid #E5E7E2` or borderless. 4px border radius. All caps or title-case `caption` typography with `font-weight: 600`.
+- **Status Chips:** Peer-reviewed status uses `#EAF0EB` with an institutional checkmark icon; embargoed or warning states use soft muted amber background (`#FEF3C7`) with `#D97706` text.
+
+### Cards & Document Records
+- **Base Style:** `#FFFFFF` background, `1px solid #E5E7E2` perimeter border, 8px border radius. Zero elevation shadow in resting state.
+- **Hover State:** Border shifts subtly to `#C8CCC5` accompanied by an imperceptible `2px` upward translation and ambient shadow (`0 4px 12px rgba(32, 37, 34, 0.04)`).
+- **Structure:** Distinct zones separated by internal 1px hairline horizontal dividers: title and author block on top, abstract excerpt in the body, and horizontal metadata summary (course code, university affiliation, publication year, download counter) anchored across the footer.
+
+### Input Fields & Search Bars
+- **Text Inputs:** `#FFFFFF` fill, `1px solid #E5E7E2` border, 6px radius, `body-md` typography. Placeholder text rendered in `#747A76`. On focus, the border shifts directly to `#285744` without thick outer glowing halos.
+- **Catalog Search Field:** Extended padding (`12px 16px`), prominent search icon in `#747A76`, accompanied by an embedded keyboard shortcut chip (`⌘K`) aligned to the trailing edge.
+
+### Checkboxes & Radio Buttons
+- **Selection Controls:** Crisp square (checkbox, 4px radius) and circle (radio) outlines in `1.5px solid #747A76`. Selected state fills completely with `#285744` bearing a pure white micro-checkmark or center dot.
+
+### Lists & Ledger Rows
+- **Metadata Tables:** Alternating rows avoid heavy zebra banding; all rows share a transparent background with a `1px solid #E5E7E2` bottom separator. Hover highlights the entire row with `#F8F8F5`. Monospaced numbering for citation order and index counters.
+
+### Additional Product Components
+- **Citation Exporter Modal:** Clean card overlay featuring tabbed format selectors (APA, MLA, Chicago, BibTeX) in monospace text containers with an instant "Copy Citation" secondary button.
+- **Breadcrumb Navigation:** Subtle `label-sm` chain separated by forward slashes (`/`), navigating institutional hierarchy (e.g., Department / Faculty / Course / Document).

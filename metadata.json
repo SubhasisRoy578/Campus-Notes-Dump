@@ -1,0 +1,6 @@
+{
+  "name": "CampusNotes",
+  "description": "The Shared Academic Library for University Scholars. Open-access lecture notes, past exam papers, lab manuals, and verified course materials organized across undergraduate semesters.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

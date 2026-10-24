@@ -1,0 +1,881 @@
+# CAMPUSNOTES — COMPLETE FULL-STACK WEBSITE IMPLEMENTATION
+
+## YOUR ROLE
+
+Act as a senior full-stack engineer, UI/UX implementation specialist, database architect, and application security engineer.
+
+Build a complete, production-oriented academic resource library named **CampusNotes**, using the supplied Google Stitch design as the primary visual reference.
+
+Do not merely generate a mockup, static landing page, or frontend prototype. Implement a functional website with real database integration, authentication, file storage, search, resource browsing, uploads, document previews, and administrator moderation.
+
+Work directly on the project. Inspect the existing files before making changes. Preserve any useful existing implementation and avoid unnecessary rewrites.
+
+Do not stop at planning. Implement the application, run the available checks, fix errors, and report the actual completion status.
+
+---
+
+# 1. PRODUCT OVERVIEW
+
+CampusNotes is a shared academic resource library for college students.
+
+Students can browse and download published academic resources without signing in. Authentication is required only when a visitor tries to upload a resource or access another protected feature.
+
+The website organizes academic resources across four academic years and eight semesters.
+
+Academic hierarchy:
+
+- 1st Year
+  - Semester 1
+  - Semester 2
+- 2nd Year
+  - Semester 3
+  - Semester 4
+- 3rd Year
+  - Semester 5
+  - Semester 6
+- 4th Year
+  - Semester 7
+  - Semester 8
+
+Each semester contains subjects. Each subject may contain units and these resource categories:
+
+- Class Notes
+- Previous-Year Question Papers
+- Lab Manuals
+- Reference Materials
+- Other Academic Resources
+
+The application must be simple enough for a college project team to maintain but robust enough to demonstrate real full-stack engineering.
+
+## Core product principles
+
+1. Public browsing is the default experience.
+2. Real data only; never fabricate resources or statistics.
+3. Students can contribute academic resources.
+4. Published resources cannot be edited, replaced, or deleted by ordinary users.
+5. Administrator moderation must be protected by actual backend authorization.
+6. The interface must be premium, elegant, accessible, and responsive.
+7. Keep the implementation understandable and avoid unnecessary infrastructure.
+
+---
+
+# 2. NON-NEGOTIABLE REQUIREMENTS
+
+Follow these rules throughout implementation.
+
+- The root URL `/` must open the actual resource-browsing homepage.
+- Do not make login, registration, onboarding, or a promotional landing page the default route.
+- Do not use hardcoded demo resources, fabricated subjects, fake users, placeholder statistics, fake activity, or simulated production data.
+- All resource metadata, uploaded files, publication dates, search results, and counts must come from the actual configured backend.
+- If the database is empty, show a designed empty state.
+- Users must be able to browse years, semesters, subjects, published resources, and search results without authentication.
+- Public downloads and previews must work for permitted published resources.
+- Uploading must require authentication.
+- After authentication, return the user to the upload workflow they originally requested.
+- Ordinary users must not edit, overwrite, replace, or delete published resources.
+- Frontend button visibility is not a security boundary. Enforce all permissions through backend authorization and security rules.
+- Only authorized administrators can approve, reject, or remove resources.
+- Never allow a user to grant themselves administrator privileges.
+- Do not claim that an operation succeeded unless the actual service confirms it.
+- Do not leave core functionality as TODOs, fake API responses, static arrays, or buttons that do nothing.
+- Do not introduce chatbots, AI agents, or unrelated AI features.
+- Do not replace the supplied design with a generic dashboard template.
+
+---
+
+# 3. DESIGN DIRECTION — ALEXANDRIA, LIGHT THEME
+
+Use the supplied Google Stitch design as the source of truth. Follow its layout, spacing, typography, colors, navigation, and component hierarchy as closely as possible.
+
+If the supplied design is unavailable, use the following design specification.
+
+## Visual identity
+
+Create an understated, premium academic library inspired by editorial design and modern university publications.
+
+The product should feel intentionally art-directed by a professional product-design team. It must not look like an automatically generated AI template.
+
+### Colors
+
+- Main background: warm off-white, approximately `#F8F8F5`.
+- Primary surface: white, `#FFFFFF`.
+- Primary text: charcoal, `#202522`.
+- Secondary text: muted gray, `#747A76`.
+- Primary accent: forest green, `#285744`.
+- Light accent surface: pale sage, `#EAF0EB`.
+- Borders: subtle warm gray, `#E5E7E2`.
+- Warning and destructive states: restrained amber and red.
+
+Use green selectively for primary actions, selected navigation, and meaningful status indicators. Avoid making the entire interface green.
+
+### Typography
+
+Prefer Manrope or Inter for interface text. Use a restrained editorial serif such as Newsreader for selected headings only if it matches the Stitch reference.
+
+Maintain a consistent type scale, readable line height, clear hierarchy, and compact metadata.
+
+### Layout
+
+- Desktop, tablet, and mobile support.
+- Consistent 4px or 8px spacing system.
+- Subtle 6–10px corner radii.
+- Thin borders instead of excessive shadows.
+- Strong whitespace and content hierarchy.
+- Structured lists, breadcrumbs, and compact resource rows.
+- Consistent Lucide line icons.
+- Accessible keyboard focus and hover states.
+- Smooth, restrained transitions.
+
+### Do not use
+
+- Purple-blue gradients.
+- Neon colors.
+- Glassmorphism.
+- Glowing borders.
+- Decorative AI illustrations or sparkles.
+- Excessive rounded cards.
+- Oversized dashboard metric cards.
+- Fake charts or analytics.
+- Unnecessary animations.
+- Stock-photo hero sections.
+- Random decorative elements.
+
+The product's content and information architecture should create the visual interest.
+
+---
+
+# 4. TECHNOLOGY STACK
+
+Use:
+
+## Frontend
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- React Router
+- Lucide React icons
+
+## Backend services
+- Firebase Authentication
+- Cloud Firestore
+- Firebase Cloud Storage
+- Firestore Security Rules
+- Cloud Storage Security Rules
+
+Use Firebase's client SDK for authorized browser operations. If privileged backend operations are required, use a trusted server environment with Firebase Admin SDK and server-side Firebase ID-token verification.
+
+Do not expose service-account credentials or Firebase Admin SDK secrets to the browser.
+
+Do not add MongoDB, an unnecessary second database, or a complex microservice architecture.
+
+Use a maintainable feature-based code structure. If the project already contains a working architecture, adapt it rather than replacing it unnecessarily.
+
+---
+
+# 5. WEBSITE ROUTES
+
+Implement the following routes:
+
+- `/` — Home / Browse Resources
+- `/years/:yearId` — Year overview
+- `/semesters/:semesterId` — Semester and subjects
+- `/subjects/:subjectId` — Subject resources
+- `/resources/:resourceId` — Resource details and preview
+- `/search` — Global search results
+- `/recent` — Recently published resources
+- `/auth/sign-in` — Sign in
+- `/auth/register` — Create account
+- `/auth/forgot-password` — Password recovery
+- `/upload` — Upload resource
+- `/my-uploads` — Current user's submissions
+- `/admin` — Protected administrator workspace
+- `/report/:resourceId` — Report a resource
+
+Use protected-route logic only where authentication or authorization is actually required.
+
+Public browsing routes must work for signed-out visitors.
+
+If a user is redirected to sign in from `/upload`, preserve that destination and return them to the upload form after successful authentication.
+
+---
+
+# 6. HOMEPAGE
+
+The homepage must be a functional academic resource browser, not a marketing page.
+
+Include:
+
+- CampusNotes logo.
+- Compact navigation.
+- Global search.
+- An elegant introductory heading.
+- Four academic-year sections.
+- Two semester links per year.
+- Recently added published resources.
+- A clear Upload Resource action.
+- A concise explanation that browsing is public and uploading requires an account.
+- Footer links for About, Usage Guidelines, Contact, and Report Resource.
+
+Make year and semester navigation immediately understandable.
+
+The fixed year/semester hierarchy can be represented as application configuration. Subjects and resources must be retrieved from the actual database.
+
+Display recently added resources from Firestore, sorted by real publication date.
+
+If no published resources exist, display a thoughtful empty state such as:
+
+“No resources have been published yet.”
+
+Include a clear contribution action where appropriate.
+
+Do not insert sample documents to make the homepage appear populated.
+
+---
+
+# 7. ACADEMIC NAVIGATION AND SUBJECT PAGES
+
+Implement the hierarchy:
+
+Year → Semester → Subject → Resource.
+
+Every browsing page should include:
+
+- Breadcrumb navigation.
+- Clear page title.
+- Contextual description where useful.
+- Actual data.
+- Loading, empty, and error states.
+- Retry controls when appropriate.
+
+Year pages should display the two semesters belonging to that year.
+
+Semester pages should display the actual subjects assigned to that semester.
+
+Subject pages should display the resources belonging to that subject.
+
+Resource lists must support:
+
+- Search within the subject.
+- Filter by resource type.
+- Filter by unit or topic.
+- Sort by newest.
+- Sort by oldest.
+- Sort alphabetically.
+
+Use compact, readable resource rows rather than turning every document into a large card.
+
+Each row may display, when available:
+
+- Resource title.
+- File type.
+- Resource category.
+- Unit or topic.
+- File size.
+- Publication date.
+- Public uploader display name, if appropriate.
+- Preview action.
+- Download action.
+
+Never invent metadata when the database does not contain it.
+
+Do not expose ordinary-user edit or delete controls for published resources.
+
+---
+
+# 8. SEARCH
+
+Implement real backend-backed search.
+
+Search should support:
+- Resource title.
+- Subject name.
+- Unit or topic.
+- Description.
+- Academic year and semester.
+- Resource category.
+
+Include filters for year, semester, subject, category, and file format.
+
+Include useful sorting and pagination or load-more behavior.
+
+Important: Firestore does not provide arbitrary full-text search natively. Implement a realistic initial strategy using normalized searchable fields, keywords, and prefix queries where appropriate. Document the limitations and keep the search service modular so it can later be replaced with a dedicated search provider.
+
+Do not claim that arbitrary substring or full-text search works unless it is genuinely implemented.
+
+Search must use real backend data. Do not return hardcoded search results.
+
+Show a clear empty state when nothing matches.
+
+---
+
+# 9. RESOURCE DETAIL, PREVIEW, AND DOWNLOAD
+
+Implement a dedicated resource page with:
+
+- Resource title.
+- Year, semester, subject, and unit.
+- Resource type.
+- File format and actual size.
+- Publication date.
+- Uploader display name when appropriate.
+- Preview area.
+- Download action.
+- Related resources from the same subject when available.
+- Report Resource action.
+
+## File support
+
+Accept:
+- PDF
+- DOC
+- DOCX
+- TXT
+- PNG
+- JPG/JPEG
+
+Provide an embedded PDF viewer when supported.
+
+Provide image previews for PNG and JPEG.
+
+Provide suitable text previews for TXT files when safe and practical.
+
+For DOC/DOCX, show an actual preview only if a safe, supported preview mechanism is implemented. Otherwise show file metadata and a working download action.
+
+Do not pretend unsupported formats have been previewed.
+
+Never execute uploaded HTML, scripts, or other active content.
+
+Only show publicly accessible resources when their status is `published`.
+
+Handle missing files, unavailable previews, failed downloads, and deleted or moderated resources gracefully.
+
+---
+
+# 10. AUTHENTICATION
+
+Use Firebase Authentication with email and password.
+
+Implement:
+
+- Create account.
+- Sign in.
+- Sign out.
+- Forgot password.
+- Password reset email.
+- Session persistence.
+- Form validation.
+- Password visibility toggle.
+- Loading states.
+- Clear authentication errors.
+
+Registration should collect only:
+- Display name.
+- Email.
+- Password.
+- Password confirmation, if useful.
+
+Do not store passwords in Firestore.
+
+Do not require sign-in for browsing, searching, viewing published resources, or downloading permitted files.
+
+When a signed-out visitor clicks Upload Resource:
+
+1. Preserve the intended destination.
+2. Redirect to the sign-in or registration screen.
+3. Authenticate using Firebase.
+4. Return the user to the upload flow.
+5. Allow upload only after authentication is confirmed.
+
+Implement actual Firebase authentication, not a simulated login.
+
+Use clear messages that do not reveal whether arbitrary email addresses are registered.
+
+---
+
+# 11. UPLOAD FORM AND FILE STORAGE
+
+Authenticated users can submit academic resources.
+
+Form fields:
+- Resource title.
+- Academic year.
+- Semester.
+- Subject.
+- Resource type.
+- Unit or topic, optional.
+- Description, optional.
+- File.
+
+The semester choices must match the selected academic year. Subject selection must match the selected semester.
+
+Validate required fields and file selection.
+
+Allow PDF, DOC, DOCX, TXT, PNG, and JPG/JPEG.
+
+Set a configurable maximum upload size. Use a reasonable initial limit of 10 MB unless the project environment requires a different value. Define the limit in a central configuration file and display the actual configured value in the interface.
+
+Validate file type and size in the client and enforce appropriate restrictions through trusted backend logic and storage rules. Do not rely exclusively on the file extension.
+
+Implement:
+- File picker.
+- Drag-and-drop where supported.
+- Selected filename and file size.
+- Upload progress from actual upload events.
+- Validation messages.
+- Failure handling.
+- Retry behavior.
+- Duplicate-submit prevention.
+
+Use a safe, unique Storage path for each upload. Never overwrite an existing file.
+
+## Safe upload sequence
+
+1. Confirm authentication.
+2. Validate the submitted metadata.
+3. Validate the file.
+4. Upload the file to a unique, non-overwriting Storage path.
+5. Create the Firestore resource record.
+6. Set the correct moderation status.
+7. Confirm success only after the required operations succeed.
+8. Handle orphaned files if metadata creation fails.
+
+Use server timestamps where appropriate.
+
+Do not show a success state before Firebase confirms the operation.
+
+---
+
+# 12. IMMUTABLE PUBLISHED RESOURCES
+
+This requirement is mandatory.
+
+Ordinary users cannot edit, overwrite, replace, or delete a published resource, including a resource they originally uploaded.
+
+Implement this restriction in both application behavior and security rules.
+
+- Do not expose edit/delete actions for published resources to ordinary users.
+- Do not permit direct Firestore mutations that alter published resource metadata.
+- Do not allow an ordinary user to overwrite an existing Storage object.
+- Do not allow ordinary users to change a resource status to `published`.
+- Do not rely on hiding frontend buttons to enforce these rules.
+
+For corrections, users can submit a new revision or a new resource submission. Preserve the original published file and record.
+
+Only authorized administrators can remove a published resource for a legitimate moderation reason.
+
+## Default publication workflow
+
+Use this workflow:
+
+`Upload → Pending Review → Admin Approval → Published`
+
+Rejected submissions remain unpublished. Show the uploader the real status and an appropriate rejection reason.
+
+An administrator can approve or reject a submission. Record moderation actions with the moderator ID, action, timestamp, and reason where applicable.
+
+A resource must not become publicly visible until its status is actually `published`.
+
+---
+
+# 13. ADMINISTRATOR MODERATION
+
+Implement a separate, protected moderation workspace.
+
+Features:
+- View pending submissions.
+- View resource metadata.
+- Preview or download files as an authorized moderator.
+- Approve submissions.
+- Reject submissions with a reason.
+- View reported resources.
+- Remove resources for legitimate moderation reasons.
+- View moderation history.
+
+Use a focused, consistent design. Do not turn this into a fake analytics dashboard.
+
+## Admin authorization
+
+Use Firebase custom claims or a trusted server-controlled role mechanism.
+
+Do not allow users to make themselves administrators by changing their own Firestore profile.
+
+Every privileged action must verify admin authorization on the server or through appropriate security rules.
+
+Never expose Firebase Admin SDK credentials in frontend code.
+
+---
+
+# 14. FIRESTORE DATA MODEL
+
+Use a clean, documented data model.
+
+## `subjects`
+
+- `name`
+- `normalizedName`
+- `yearNumber`
+- `semesterNumber`
+- `description`, optional
+- `createdAt`
+- `updatedAt`
+
+## `resources`
+
+- `title`
+- `normalizedTitle`
+- `description`, optional
+- `yearNumber`
+- `semesterNumber`
+- `subjectId`
+- `unitOrTopic`, optional
+- `resourceType`
+- `fileName`
+- `storagePath`
+- `contentType`
+- `fileSizeBytes`
+- `uploaderUid`
+- `uploaderDisplayName`, if appropriate
+- `status`
+- `searchKeywords`
+- `createdAt`
+- `publishedAt`, when applicable
+- `moderationReason`, when applicable
+
+Allowed resource statuses:
+- `pending_review`
+- `published`
+- `rejected`
+
+## `users`
+
+- `displayName`
+- `createdAt`
+
+Store only necessary profile information. Do not store passwords.
+
+## `resourceReports`
+
+- `resourceId`
+- `reason`
+- `description`, optional
+- `reporterUid`, if authenticated
+- `createdAt`
+- `status`
+
+## `moderationLogs`
+
+- `resourceId`
+- `moderatorUid`
+- `action`
+- `reason`, when applicable
+- `createdAt`
+
+Restrict access to private user information and moderation records.
+
+Create necessary Firestore indexes and document any composite indexes required.
+
+Do not allow ordinary clients to set protected fields or perform unauthorized status transitions.
+
+---
+
+# 15. MY UPLOADS
+
+Implement a protected My Uploads page.
+
+Show only submissions belonging to the authenticated user.
+
+Display:
+- Resource title.
+- Academic year and semester.
+- Subject.
+- Submission date.
+- Actual moderation status.
+- Rejection reason where appropriate.
+- View resource action if the resource is accessible.
+
+Do not show ordinary-user edit or delete controls for published resources.
+
+Allow a user to submit a correction as a separate new submission without replacing the published original.
+
+---
+
+# 16. REPORT RESOURCE
+
+Implement a Report Resource flow.
+
+Available reasons:
+- Incorrect subject or metadata.
+- Copyright concern.
+- Inappropriate content.
+- Corrupted or unreadable file.
+- Duplicate resource.
+- Other.
+
+Include an optional explanation.
+
+Store reports in Firestore with appropriate validation and permissions.
+
+Implement reasonable abuse protection, such as duplicate-report handling and rate limiting where supported.
+
+Show confirmation only after the report has actually been stored.
+
+Never display private reporter information publicly.
+
+---
+
+# 17. SECURITY RULES
+
+Create real Firestore and Cloud Storage Security Rules in the project.
+
+They must enforce:
+
+- Public reads only for permitted published-resource metadata.
+- Public file access only for approved published resources, according to the chosen Storage access design.
+- Authentication for uploads.
+- Ownership restrictions for pending submissions.
+- No ordinary-user modification or deletion of published resource records.
+- No ordinary-user overwrite or deletion of existing uploaded files.
+- Admin-only moderation.
+- Validated fields and allowed status transitions.
+- Protection for private user data and moderation records.
+
+A client-side role check is not sufficient.
+
+If some checks require trusted server logic, implement that logic or document precisely what remains to be configured. Never claim that an incomplete rule set guarantees security.
+
+Ensure the chosen Storage design supports the desired public preview and download experience without exposing unpublished files.
+
+---
+
+# 18. RESPONSIVE DESIGN
+
+The website must work on desktop, laptop, tablet, and mobile.
+
+Implement responsive layouts rather than simply shrinking desktop elements.
+
+On mobile:
+- Keep search accessible.
+- Use compact resource rows.
+- Make filters usable.
+- Keep forms readable.
+- Support native file selection.
+- Use touch-friendly controls.
+- Avoid horizontal overflow.
+- Keep PDF previews usable.
+- Preserve the premium design quality.
+
+Test at representative desktop and mobile viewport widths.
+
+---
+
+# 19. EMPTY, LOADING, AND ERROR STATES
+
+Every data-driven route must handle:
+
+- Initial loading.
+- Empty database.
+- Empty semester.
+- Empty subject.
+- No search results.
+- Network error.
+- Authentication error.
+- Permission denied.
+- Missing resource.
+- Invalid file.
+- Oversized file.
+- Upload failure.
+- Failed preview.
+- Failed download.
+- Pending review.
+- Rejected submission.
+- Failed moderation action.
+
+Use clean, designed states with clear messages and retry actions where appropriate.
+
+Do not use fake loading animations to conceal unfinished functionality.
+
+Do not fabricate counts, dates, progress, or success states.
+
+---
+
+# 20. CODE ORGANIZATION
+
+Keep the project modular and maintainable.
+
+Suggested structure:
+
+`src/`
+- `app/`
+- `components/`
+- `pages/`
+- `features/auth/`
+- `features/resources/`
+- `features/upload/`
+- `features/moderation/`
+- `services/firebase/`
+- `services/resources/`
+- `hooks/`
+- `types/`
+- `utils/`
+
+Include:
+- Strong TypeScript types.
+- Reusable UI components.
+- Centralized Firebase configuration.
+- Centralized validation.
+- Clear service functions.
+- Consistent error handling.
+- Environment configuration.
+- Comments for security-sensitive logic.
+
+Avoid one giant React component and unnecessary dependencies.
+
+Preserve existing working features when modifying the project.
+
+---
+
+# 21. ENVIRONMENT CONFIGURATION AND README
+
+Create a `.env.example` file with placeholder values only.
+
+Never include real secrets in the source code or repository.
+
+Create a complete `README.md` explaining:
+
+- Project overview.
+- Required tools.
+- Installation.
+- Development commands.
+- Firebase project creation.
+- Email/Password Authentication setup.
+- Firestore setup.
+- Cloud Storage setup.
+- Security Rules deployment.
+- Required indexes.
+- Creating the initial subject records.
+- Securely granting the first administrator role.
+- Upload-size configuration.
+- Running tests.
+- Production build.
+- Deployment.
+- Known limitations.
+
+Clearly distinguish code that is implemented from services that still require manual configuration.
+
+---
+
+# 22. TESTING
+
+Run the checks supported by the current environment.
+
+Verify:
+
+1. `/` opens the real public homepage.
+2. Public browsing works while signed out.
+3. Empty database states work.
+4. Subjects and resources load from Firestore.
+5. Search uses real data.
+6. Registration and sign-in use Firebase Authentication.
+7. Password recovery uses Firebase's real reset flow.
+8. Upload requires authentication.
+9. File and metadata validation works.
+10. Storage paths are unique.
+11. Pending resources are not publicly listed.
+12. Only published resources are publicly accessible.
+13. Ordinary users cannot publish their own submissions.
+14. Ordinary users cannot edit or delete published resources.
+15. Ordinary users cannot overwrite existing files.
+16. Unauthorized users cannot moderate resources.
+17. Authorized administrators can approve and reject submissions.
+18. My Uploads shows only the current user's submissions.
+19. Reports are stored correctly.
+20. Mobile layouts do not overflow.
+21. The production build succeeds.
+
+Use Firebase Emulator Suite for security-rule tests if available.
+
+Do not claim tests passed unless they were actually run. If Firebase credentials or emulator setup are unavailable, clearly list the checks that remain unverified.
+
+---
+
+# 23. IMPLEMENTATION PLAN
+
+Complete the project in these phases.
+
+### Phase 1: Foundation and design
+- Inspect the existing project.
+- Implement the Stitch design faithfully.
+- Set up routes, navigation, and reusable components.
+- Build the public homepage.
+
+### Phase 2: Real data
+- Configure Firebase.
+- Implement subjects and resource data access.
+- Build year, semester, subject, recent-resource, and search pages.
+- Add empty, loading, and error states.
+
+### Phase 3: Authentication
+- Implement registration, sign-in, sign-out, and password recovery.
+- Protect upload routes.
+- Preserve the return-to-upload flow.
+
+### Phase 4: Upload and preview
+- Implement Storage uploads.
+- Save Firestore metadata.
+- Add PDF and supported-file previews.
+- Add downloads.
+- Enforce immutable published resources.
+
+### Phase 5: Moderation and security
+- Implement protected administrator actions.
+- Implement reporting.
+- Add Firestore and Storage rules.
+- Test unauthorized access and mutation attempts.
+
+### Phase 6: Verification
+- Run TypeScript checks.
+- Run the production build.
+- Run available tests.
+- Check desktop and mobile layouts.
+- Fix runtime and UI errors.
+- Complete documentation.
+
+Do not stop after the first phase. Continue until all phases have been implemented as far as the available environment permits.
+
+---
+
+# 24. DEFINITION OF DONE
+
+The application is complete only when:
+
+- It opens directly to the real public browsing page.
+- It closely follows the supplied Stitch design.
+- It uses actual Firebase services once configured.
+- It works with an empty database.
+- It contains no fake production data.
+- Public browsing and permitted downloads work.
+- Authentication is required for uploads, not browsing.
+- Published resources are immutable to ordinary users.
+- Administrator moderation is properly protected.
+- File upload and preview flows work.
+- Security rules are included and tested where possible.
+- Responsive layouts work.
+- Error and empty states are implemented.
+- Documentation is complete.
+- The production build succeeds.
+
+At the end, report:
+
+1. Features implemented.
+2. Routes implemented.
+3. Firebase services integrated.
+4. Security rules created.
+5. Tests actually executed and their results.
+6. Production build result.
+7. Manual setup still required.
+8. Remaining limitations.
+
+Be accurate. Never claim that a service is configured, a deployment is live, or a security rule is verified unless that is demonstrably true.
+
+Begin by inspecting the project and supplied design. Then implement the complete application in the phases above.
